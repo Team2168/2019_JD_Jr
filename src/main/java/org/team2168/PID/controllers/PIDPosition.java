@@ -1173,7 +1173,7 @@ public class PIDPosition implements TCPMessageInterface {
 			// FIXME : Make apart of method
 			if (Math.abs(err) <= acceptErrorDiff) {
 				if(this.enableHoldingVoltage)
-					co = this.holdingVoltage/Robot.pdp.getBatteryVoltage();
+					co = this.holdingVoltage/PowerDistribution.getInstance().getBatteryVoltage();
 				else
 					co = 0;
 				this.isFinished = true;

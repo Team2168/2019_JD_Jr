@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 
 public class PowerDistribution {
 	private java.util.Timer executor;
-	private long period;
+	private long period = 100; //ms
 
 	private PowerDistributionPanel pdp;
 
@@ -31,8 +31,16 @@ public class PowerDistribution {
 
 	int currentTimeThreshold;
 
-	public PowerDistribution(long period) {
-		this.period = period;
+	private static PowerDistribution instance = null;
+
+	public static PowerDistribution getInstance() {
+		if (instance==null) {
+			instance = new PowerDistribution();
+		}
+
+		return instance;
+	}
+	private PowerDistribution() {
 		pdp = new PowerDistributionPanel(RobotMap.PDP_CAN_ID);
 
 		// Calculate number of loops needed to meet time iteration

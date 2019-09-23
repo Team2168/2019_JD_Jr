@@ -426,7 +426,6 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	/*************************************************************************
 	 *                         PDP PARAMETERS                                *
 	 *************************************************************************/
-	public static final long PDPThreadPeriod = 100;
 	public static final double WARNING_CURRENT_LIMIT = 20;
 	public static final double STALL_CURRENT_LIMIT = 350;
 	public static final double CURRENT_LIMIT_TIME_THRESHOLD_SECONDS = 1;
