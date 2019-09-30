@@ -126,6 +126,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int STINGER_DISENGAGE_PCM = 2;
 
 	public static final int HATCH_EXTENSION_PCM = 1;
+	public static final int HATCH_RETRACTION_PCM = 2;
 	
 	//Double Soldenoids PCM ID = 1
 	public static final int PROBE_ROTATE_BRAKE_EXTENDED_PCM = 0;

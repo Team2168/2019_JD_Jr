@@ -7,7 +7,7 @@ import org.team2168.Robot;
 import org.team2168.RobotMap;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
-public class HatchSystem extends Subsystem{
+public class HatchManipulator extends Subsystem{
     private DoubleSolenoid _dSolenoidExtend;
     private DigitalInput _hatchCheck1;
     private DigitalInput _hatchCheck2;
@@ -15,9 +15,9 @@ public class HatchSystem extends Subsystem{
     private DigitalInput _hatchCheck4;
 }
 
-private HatchSystem()
+private HatchManipulator()
 {
-    _dSolenoidExtend = new DoubleSolenoid(RobotMap.HATCH_EXTENSION_PCM);
+    _dSolenoidExtend = new DoubleSolenoid(RobotMap.HATCH_EXTENSION_PCM, RobotMap.HATCH_RETRACTION_PCM);
     _hatchCheck1 = new DigitalInput(RobotMap.CHECK_ONE);
     _hatchCheck2 = new DigitalInput(RobotMap.CHECK_TWO);
     _hatchCheck3 = new DigitalInput(RobotMap.CHECK_THREE);
@@ -67,5 +67,11 @@ public void checkFour(){
     else 
         output Signal.min(output, 0);
     }
+}
+
+public 
+
+public void initDefaultCommand(){
+
 }
 }
