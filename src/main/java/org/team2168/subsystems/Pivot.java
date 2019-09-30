@@ -22,7 +22,7 @@ public class Pivot extends Subsystem {
   public boolean isRobotPartExtended = false;
   public Pivot() 
   {
-    PivotRobot = new DoubleSolenoid(RobotMap.PIVOT_THING_PCM, 0);
+    PivotRobot = new DoubleSolenoid(RobotMap.PIVOT_EXTENDS_PCM, RobotMap.PIVOT_RETRACTS_PCM);
   }
   
   public static Pivot getinstance()
@@ -40,7 +40,7 @@ public class Pivot extends Subsystem {
     PivotRobot.set(DoubleSolenoid.Value.kForward);
     this.isRobotPartExtended = true;
   }
-  
+
   /**
    * Retracts the pivot postion for the robot part
    */
