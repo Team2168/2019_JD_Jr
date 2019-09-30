@@ -10,6 +10,7 @@ package org.team2168.subsystems;
 import org.team2168.RobotMap;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,8 +19,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pivot extends Subsystem {
   private static Pivot instance = null;
   private static DoubleSolenoid PivotRobot;
-  
-  public boolean isRobotPartExtended = false;
+
   public Pivot() 
   {
     PivotRobot = new DoubleSolenoid(RobotMap.PIVOT_EXTENDS_PCM, RobotMap.PIVOT_RETRACTS_PCM);
@@ -38,7 +38,6 @@ public class Pivot extends Subsystem {
   public void extendRobotPart()
   {
     PivotRobot.set(DoubleSolenoid.Value.kForward);
-    this.isRobotPartExtended = true;
   }
 
   /**
@@ -47,12 +46,17 @@ public class Pivot extends Subsystem {
   public void retractRobotPart()
   {
     PivotRobot.set(DoubleSolenoid.Value.kReverse);
-    this.isRobotPartExtended = false;
   }
 
-  public boolean getRobotPartStatus()
+  public boolean isRobotPartExtended()
   {
-    return isRobotPartExtended;
+    return PivotRobot.get() == Value.kForward;
+
+  }
+  
+  public boolean isRobotPartRetracted()
+  {
+    return PivotRobot.get() == Value.kReverse;
   }
 
   public void initDefaultCommand() {
