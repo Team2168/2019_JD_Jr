@@ -54,6 +54,14 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int LEFT_DRIVE_ENCODER_B = 2;
 	public static final int LEFT_DRIVE_ENCODER_A = 3;
 
+	public static final int CHECK_ONE = 1;
+	public static final int CHECK_TWO = 1;
+	public static final int CHECK_THREE = 1;
+	public static final int CHECK_FOUR = 1;
+
+
+
+
 	public static final int RIGHT_STINGER_ENCODER_A = 4;//change something
 	public static final int RIGHT_STINGER_ENCODER_B = 5;//change
 	public static final int LEFT_STINGER_ENCODER_B = 8;//change
@@ -116,6 +124,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int STINGER_RACHET_DISENGAGE_PCM = 5;
 	public static final int STINGER_ENGAGE_PCM = 3;
 	public static final int STINGER_DISENGAGE_PCM = 2;
+
+	public static final int HATCH_EXTENSION_PCM = 1;
 	
 	//Double Soldenoids PCM ID = 1
 	public static final int PROBE_ROTATE_BRAKE_EXTENDED_PCM = 0;
