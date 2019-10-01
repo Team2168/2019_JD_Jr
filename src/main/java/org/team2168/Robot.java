@@ -7,6 +7,8 @@
 
 package org.team2168;
 
+import org.team2168.subsystems.CargoIntake;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,7 +28,7 @@ public class Robot extends TimedRobot {
 
   // Operator Interface
   public static OI oi;
-
+  public static CargoIntake cargoIntake;
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
