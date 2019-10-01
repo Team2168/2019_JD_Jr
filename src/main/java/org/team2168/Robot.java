@@ -7,6 +7,9 @@
 
 package org.team2168;
 
+import org.team2168.subsystems.VacuumClimberLift;
+import org.team2168.subsystems.VacuumClimberPump;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -24,6 +27,10 @@ public class Robot extends TimedRobot {
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
+  //climber
+  public static VacuumClimberLift vacuumClimberLift;
+  public static VacuumClimberPump vacuumClimberPump;
+
   // Operator Interface
   public static OI oi;
 
@@ -36,6 +43,9 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
+
+    vacuumClimberLift = VacuumClimberLift.getInstance();
+    vacuumClimberPump = VacuumClimberPump.getInstance();
   }
 
   /**

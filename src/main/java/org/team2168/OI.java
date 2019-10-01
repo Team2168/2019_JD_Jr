@@ -157,12 +157,17 @@ public class OI
 	}
 
 	/*************************************************************************
-	 *Hatch Floor Motor*
+	 *Vacuum Climber Lift & Pump*
 	*************************************************************************/
-	public double getHatchFloorIntakeJoystickValue()
-	{
-		return 0;//operatorJoystick.getLeftStickRaw_X();
-	}
+	public double getVacuumClimberLiftJoystickValue()
+    {
+        return -operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
+    }
+
+    public double getVacuumClimberPumpJoystickValue()
+    {
+		return operatorJoystick.getLeftStickRaw_Y();
+	} 
 
 	/*************************************************************************
 	 * Drivetrain *

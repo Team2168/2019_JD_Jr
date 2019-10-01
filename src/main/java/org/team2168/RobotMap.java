@@ -138,15 +138,12 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 1;
 	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 2;
 	public static final int LIFT_MOTOR_2_PDP = 3;
-	public static final int MONKEY_BAR_INTAKE_WHEELS_LEFT_PDP = 4;
-	public static final int MONKEY_BAR_INTAKE_WHEELS_RIGHT_PDP = 5; //has to be swapped or inverted or something
-	public static final int HATCH_FLOOR_INTAKE_PDP= 6;
 	public static final int COMPRESSOR_PDP = 7;
 	public static final int CARGO_INTAKE_MOTOR_PDP = 8;
-	public static final int PLUNGER_PIVOT_MOTOR_PDP = 9;
-	public static final int MONKEY_BAR_ROTATE_LEFT_PDP = 10;
-	public static final int MONKEY_BAR_ROTATE_RIGHT_PDP = 11;
 
+	public static final int CLIMBER_LIFT_MOTOR_1_PDP = 9; //TODO SET
+    public static final int CLIMBER_LIFT_MOTOR_2_PDP = 10;
+    public static final int CLIMBER_PUMP_MOTOR_PDP = 11;
 
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 15;
@@ -180,7 +177,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 
 	private static final int DRIVE_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
 
-	private static final double DRIVE_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
+	private static final double DRIVE_GEAR_RATIO = 5.65 / 1.0; // ratio between wheel over encoder
 	private static final double DRIVE_WHEEL_DIAMETER = 6.0;   //inches;
 	public static final int DRIVE_ENCODER_PULSE_PER_ROT = (int) (DRIVE_PULSE_PER_ROTATION * DRIVE_GEAR_RATIO); // pulse per rotation * gear																					// ratio
 	
@@ -286,142 +283,14 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final boolean ENABLE_LIFT_POT_SAFETY = true;
 	public static final int LIFT_AVG_ENCODER_VAL = 5;
 
-
 	/*************************************************************************
-	 *                      Monkey Bar PARAMETERS                            *
-	 *************************************************************************/
+	*                         VACUUM CLIMBER PARAMETERS                      *
+    *************************************************************************/
 
-	public static final boolean ONE_TRIGGER_CLIMB_ENABLED = false;
-	public static final boolean MONKEY_BAR_ROTATE_RIGHT_REVERSE = true;
-	public static final boolean MONKEY_BAR_ROTATE_LEFT_REVERSE = false;
-	
-	public static final boolean MONKEY_BAR_INTAKE_RIGHT_REVERSE = true;
-	public static final boolean MONKEY_BAR_INTAKE_LEFT_REVERSE = false;
+    public static final boolean CLIMBER_LIFT_MOTOR_1_REVERSE = false;
+    public static final boolean CLIMBER_LIFT_MOTOR_2_REVERSE = true;
+    public static final boolean CLIMBER_PUMP_MOTOR_REVERSE = false;
 
-	public static final double MONKEY_BAR_HOLDING_VOLTAGE = 0.0; //volts to keep arm steady
-	public static final double MONKEY_BAR_HOLDING_VOLTAGE_PBOT = 0.0; //volts to keep arm steady
-	
-	public static final double MONKEY_BAR_RIGHT_POT_VOLTAGE_MAX = 4.3; //130 degrees
-	public static final double MONKEY_BAR_RIGHT_POT_MAX_ROTATION = 130; //130 degrees
-	public static final double MONKEY_BAR_RIGHT_POT_VOLTAGE_0 = 1.1; //0 degrees
-	public static final double MONKEY_BAR_RIGHT_ANGLE_DEGREES_0 = 0.0;
-	public static final int MONKEY_BAR_RIGHT_AVG_ENCODER_VAL = 5;
-
-
-	public static final double MONKEY_BAR_SAFE_LIFT_POS = 80.0; //TODO SET ALL
-	public static final double MONKEY_BAR_SAFE_PIVOT_POS = 90;
-	public static final double MONKEY_BAR_SAFE_SCORING_POS = 120; 
-	public static final double MONKEY_BAR_FLOOR_POS = 0;
-	public static final double MONKEY_BAR_STOW_POS = 180;
-	public static final double MONKEY_BAR_CARGO_INTAKE_POS = 40;
-
-	//PBOT	
-	public static final double MONKEY_BAR_RIGHT_POT_VOLTAGE_MAX_PBOT = 3.95; //
-	public static final double MONKEY_BAR_RIGHT_POT_MAX_ROTATION_PBOT = 0; //0 degrees
-	public static final double MONKEY_BAR_RIGHT_POT_VOLTAGE_0_PBOT = 0.50; //130 degrees
-	public static final double MONKEY_BAR_RIGHT_ANGLE_DEGREES_0_PBOT = 130.0;
-	public static final int MONKEY_BAR_RIGHT_AVG_ENCODER_VAL_PBOT = 5;
-
-	public static final double MONKEY_BAR_SAFE_LIFT_POS_PBOT = 100.0; //TODO SET ALL
-	public static final double MONKEY_BAR_SAFE_PIVOT_POS_PBOT = 0;
-	public static final double MONKEY_BAR_SAFE_SCORING_POS_PBOT = 160; 
-	public static final double MONKEY_BAR_FLOOR_POS_PBOT = 0;
-	public static final double MONKEY_BAR_STOW_POS_PBOT = 180;
-	public static final double MONKEY_BAR_CARGO_INTAKE_POS_PBOT = 10;
-
-
-	public static final int MONKEY_BAR_AVG_ENCODER_VAL = 5;
-
-	/*************************************************************************
-	 *                         Stinger Winch PARAMETERS                               *
-	 *************************************************************************/
-
-	public static final boolean WINCH_MOTOR_LEFT_REVERSE = true;
-	public static final boolean WINCH_MOTOR_RIGHT_REVERSE = true;
-
-	public static final double STINGER_LEFT_POT_VOLTAGE_MAX = 4.0; //85 degrees
-	public static final double STINGER_LEFT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double STINGER_LEFT_POT_VOLTAGE_0 = 0.62; //0 degrees
-	public static final double STINGER_LEFT_POT_0_HEIGHT_INCHES = 0.0;
-
-	public static final double STINGER_RIGHT_POT_VOLTAGE_MAX = 4.0; //85 degrees
-	public static final double STINGER_RIGHT_POT_MAX_HEIGHT_INCHES = 82.5;
-	public static final double STINGER_RIGHT_POT_VOLTAGE_0 = 0.62; //0 degrees
-	public static final double STINGER_RIGHT_POT_0_HEIGHT_INCHES = 0.0;
-
-	//PBOT
-	public static final double STINGER_LEFT_POT_VOLTAGE_MAX_PBOT = 4.0; //85 degrees
-	public static final double STINGER_LEFT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
-	public static final double STINGER_LEFT_POT_VOLTAGE_0_PBOT = 0.62; //0 degrees
-	public static final double STINGER_LEFT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
-
-	public static final double STINGER_RIGHT_POT_VOLTAGE_MAX_PBOT = 4.0; //85 degrees
-	public static final double STINGER_RIGHT_POT_MAX_HEIGHT_INCHES_PBOT = 82.5;
-	public static final double STINGER_RIGHT_POT_VOLTAGE_0_PBOT = 0.62; //0 degrees
-	public static final double STINGER_RIGHT_POT_0_HEIGHT_INCHES_PBOT = 0.0;
-
-	private static final int STINGER_PULSE_PER_ROTATION = 256; // encoder ticks per rotation
-	private static final double STINGER_GEAR_RATIO = 1.0 / 1.0; // ratio between wheel over encoder
-	private static final double STINGER_WHEEL_DIAMETER = 0.5;   //inches;
-	public static final int STINGER_ENCODER_PULSE_PER_ROT = (int) (STINGER_PULSE_PER_ROTATION * STINGER_GEAR_RATIO); // pulse per rotation * gear																					// ratio
-	
-	public static final double STINGER_ENCODER_DIST_PER_TICK = (Math.PI * STINGER_WHEEL_DIAMETER / STINGER_ENCODER_PULSE_PER_ROT);
-	public static final CounterBase.EncodingType STINGER_ENCODING_TYPE = CounterBase.EncodingType.k4X; // count rising and falling edges on
-	public static final AverageEncoder.PositionReturnType STINGER_POS_RETURN_TYPE = AverageEncoder.PositionReturnType.INCH;
-	public static final AverageEncoder.SpeedReturnType STINGER_SPEED_RETURN_TYPE = AverageEncoder.SpeedReturnType.IPS;
-	public static final int STINGER_ENCODER_MIN_RATE = 0;
-	public static final int STINGER_ENCODER_MIN_PERIOD = 1;
-	public static final boolean LEFT_STINGER_TRAIN_ENCODER_REVERSE = true;
-	public static final boolean RIGHT_STINGER_TRAIN_ENCODER_REVERSE = true;
-
-	public static final int STINGER_AVG_ENCODER_VAL = 5;
-	/*************************************************************************
-	 *                         Plunger Arm Pivot PARAMETERS                   *																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																										
-	 *************************************************************************/
-	public static final boolean PLUNGER_ARM_PIVOT_ENABlE_HEIGHT_HOLD = false;
-	public static final double PLUNGER_ARM_PIVOT_HOLDING_VOLTAGE = 3.0; //volts
-	public static final boolean PLUNGER_PIVOT_ENABLE_INTERLOCKS = false;
-	
-	 ////TODO set these values
-	public static final boolean PLUNGER_ARM_PIVOT_REVERSE = true; //TODO set
-	public static final double PIVOT_POT_VOLTAGE_0 = 0.004;
-	public static final double PIVOT_POT_0_ROTATION_DEGREES = 180;
-
-	public static final double PIVOT_POT_VOLTAGE_MAX = 4.92;
-	public static final double PIVOT_POT_MAX_ROTATION_DEGREES = 0.0;
-
-	public static final double PLUNGER_ARM_MIDDLE_POS = 90;
-	public static final double PLUNGER_ARM_SAFE_POS_FRONT = 45;
-	public static final double PLUNGER_ARM_SAFE_POS_BACK = 135;
-	public static final double PLUNGER_ARM_CARGO_SHIP_POS = 45;
-	public static final double PLUNGER_ARM_ERROR = 5;
-
-	public static final double PIVOT_0_POS = 0;
-	public static final double PIVOT_180_POS = 180;
-	public static final double PIVOT_CARGO_SHIP_POS = 0; //TODO SET ALL
-
-	/////TODO set these values
-	public static final double PIVOT_POT_VOLTAGE_0_PBOT = 0.7;
-	public static final double PIVOT_POT_VOLTAGE_MAX_PBOT = 4.92;
-	public static final double PIVOT_POT_0_ROTATION_DEGREES_PBOT = 180;
-	public static final double PIVOT_POT_MAX_ROTATION_DEGREES_PBOT = 0;
-	public static final double PLUNGER_ARM_MIDDLE_POS_PBOT = 90;
-	public static final double PLUNGER_ARM_SAFE_POS_FRONT_PBOT = 45;
-	public static final double PLUNGER_ARM_SAFE_POS_BACK_PBOT = 135;
-	public static final double PLUNGER_ARM_CARGO_SHIP_POS_PBOT = 45;
-	public static final double PLUNGER_ARM_ERROR_PBOT = 5;
-
-	public static final double PIVOT_0_POS_PBOT = 0;
-	public static final double PIVOT_180_POS_PBOT = 180;
-	public static final double PIVOT_CARGO_SHIP_POS_PBOT = 0; //TODO SET ALL
-
-	public static final int PIVOT_AVG_ENCODER_VAL = 5; //taken from 2018 lift encoder
-
-	public static final double PIVOT_MIN_SPEED = 0.15; //made this up for LEDs
-
-	public static final int PIVOT_ANGLE_MONKEY_BAR_SIDE = 90;
-
-	
 
 	/*************************************************************************
 	 *                         PDP PARAMETERS                                *
@@ -471,26 +340,9 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
 	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
 
-	public static final double STINGER_AUTO_RIGHT_POSITION_P = 0.1;
-	public static final double STINGER_AUTO_RIGHT_POSITION_I = 0.01;
-	public static final double STINGER_AUTO_RIGHT_POSITION_D = 0.0;
-
-	public static final double STINGER_AUTO_LEFT_POSITION_P = 0.1;
-	public static final double STINGER_AUTO_LEFT_POSITION_I = 0.01;
-	public static final double STINGER_AUTO_LEFT_POSITION_D = 0.0;
-
-
 	public static final double LIFT_P = 0.044;
 	public static final double LIFT_I = 0.0020;
 	public static final double LIFT_D = 0.0001;
-
-	public static final double MB_PIVOT_P = 0.025;
-	public static final double MB_PIVOT_I = 0.002;
-	public static final double MB_PIVOT_D = 0.00;
-
-	public static final double HP_PIVOT_P = 0.024;
-	public static final double HP_PIVOT_I = 0.027;
-	public static final double HP_PIVOT_D = 000000067;
 
 	public static final double LIMELIGHT_POSITION_P = 0.013;
 	public static final double LIMELIGHT_POSITION_I = 0.0;
