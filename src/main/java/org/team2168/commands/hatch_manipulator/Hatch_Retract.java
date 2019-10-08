@@ -11,11 +11,10 @@ import edu.wpi.first.wpilibj.command.Command;
 import org.team2168.Robot;
 import org.team2168.subsystem.HatchManipulator;
 
-public class Hatch_Extend extends Command {
-  public Hatch_Extend() {
+public class Hatch_Retract extends Command {
+  public Hatch_Retract() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires (Robot.hatchManipulator);
   }
 
   // Called just before this Command runs the first time
@@ -27,13 +26,14 @@ public class Hatch_Extend extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulator.extend();
+    Robot.hatchManipulator.retract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return Robot.hatchManipulator.isArmExtended();
+  protected boolean isFinished() 
+  {
+   return Robot.hatchManipulator.isArmRetracted();
   }
 
   // Called once after isFinished returns true

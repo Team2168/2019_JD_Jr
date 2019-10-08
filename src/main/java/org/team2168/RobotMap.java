@@ -54,10 +54,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int LEFT_DRIVE_ENCODER_B = 2;
 	public static final int LEFT_DRIVE_ENCODER_A = 3;
 
-	public static final int CHECK_ONE = 1;
-	public static final int CHECK_TWO = 1;
-	public static final int CHECK_THREE = 1;
-	public static final int CHECK_FOUR = 1;
+
 
 
 
