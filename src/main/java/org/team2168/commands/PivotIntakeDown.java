@@ -10,27 +10,26 @@ package org.team2168.commands;
 import org.team2168.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class ExtendRobotPart extends Command {
-  public ExtendRobotPart() {
-    requires(Robot.pivot);
+public class PivotIntakeDown extends Command {
+  public PivotIntakeDown() {
+    requires(Robot.intakePivot);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.pivot.extendRobotPart();
+    Robot.intakePivot.pivotIntakeDown();
   }
-
+  
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.intakePivot.isPivotIntakeDown();
   }
 
   // Called once after isFinished returns true

@@ -7,7 +7,7 @@
 
 package org.team2168;
 
-import org.team2168.subsystems.Pivot;
+import org.team2168.subsystems.IntakePivot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -25,7 +25,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
-  public static Pivot pivot;
+  public static IntakePivot intakePivot;
 
   // Operator Interface
   public static OI oi;
@@ -40,7 +40,7 @@ public class Robot extends TimedRobot {
     m_chooser.addOption("My Auto", kCustomAuto);
     SmartDashboard.putData("Auto choices", m_chooser);
 
-    pivot = Pivot.getinstance();
+    intakePivot = IntakePivot.getinstance();
     
   }
 

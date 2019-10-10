@@ -16,26 +16,26 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class Pivot extends Subsystem {
-  private static Pivot instance = null;
+public class IntakePivot extends Subsystem {
+  private static IntakePivot instance = null;
   private static DoubleSolenoid PivotRobot;
 
-  public Pivot() 
+  public IntakePivot() 
   {
     PivotRobot = new DoubleSolenoid(RobotMap.PIVOT_EXTENDS_PCM, RobotMap.PIVOT_RETRACTS_PCM);
   }
   
-  public static Pivot getinstance()
+  public static IntakePivot getinstance()
   {
     if (instance == null)
-        instance = new Pivot();
+        instance = new IntakePivot();
     return instance;
   }
-
+  
   /**
    * Extends the pivot position for the robot part
    */
-  public void extendRobotPart()
+  public void pivotIntakeUp()
   {
     PivotRobot.set(DoubleSolenoid.Value.kForward);
   }
@@ -43,18 +43,18 @@ public class Pivot extends Subsystem {
   /**
    * Retracts the pivot postion for the robot part
    */
-  public void retractRobotPart()
+  public void pivotIntakeDown()
   {
     PivotRobot.set(DoubleSolenoid.Value.kReverse);
   }
 
-  public boolean isRobotPartExtended()
+  public boolean isPivotIntakeUp()
   {
     return PivotRobot.get() == Value.kForward;
 
   }
   
-  public boolean isRobotPartRetracted()
+  public boolean isPivotIntakeDown()
   {
     return PivotRobot.get() == Value.kReverse;
   }
