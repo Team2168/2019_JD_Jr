@@ -65,7 +65,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 
 
 	//Channels 10-25 on MXP (PWM and DIO)
-  	public static final int PWM_LIGHTS = 18;
+	public static final int PWM_LIGHTS = 18;
 	public static final int CAN_DRIVETRAIN_JUMPER = 23; 
 	public static final int PRACTICE_BOT_JUMPER = 24;
 
@@ -142,8 +142,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int CARGO_INTAKE_MOTOR_PDP = 8;
 
 	public static final int CLIMBER_LIFT_MOTOR_1_PDP = 9; //TODO SET
-    public static final int CLIMBER_LIFT_MOTOR_2_PDP = 10;
-    public static final int CLIMBER_PUMP_MOTOR_PDP = 11;
+	public static final int CLIMBER_LIFT_MOTOR_2_PDP = 10;
+	public static final int CLIMBER_PUMP_MOTOR_PDP = 11;
 
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 15;

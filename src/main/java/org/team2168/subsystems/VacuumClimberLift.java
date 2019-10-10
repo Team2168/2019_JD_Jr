@@ -69,12 +69,6 @@ public class VacuumClimberLift extends Subsystem {
     driveClimberLiftMotor2(speed);
   }
 
-  
-
-  
-
-
-
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
