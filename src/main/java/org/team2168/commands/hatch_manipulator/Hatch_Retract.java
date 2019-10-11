@@ -33,7 +33,7 @@ public class Hatch_Retract extends Command {
   @Override
   protected boolean isFinished() 
   {
-   return Robot.hatchManipulator.isArmRetracted();
+   return Robot.hatchManipulator.isManipulatorRetracted();
   }
 
   // Called once after isFinished returns true

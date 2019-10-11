@@ -33,7 +33,7 @@ public class Hatch_Extend extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.hatchManipulator.isArmExtended();
+    return Robot.hatchManipulator.isManipulatorExtended();
   }
 
   // Called once after isFinished returns true
