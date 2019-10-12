@@ -126,6 +126,11 @@ public class OI
 			return operatorJoystick.getLeftStickRaw_Y();
 		}
 
+	public double getVacuumLiftJoystickValue()
+	{
+		return -operatorJoystick.getRightStickRaw_Y();
+	}
+
 	/*************************************************************************
 	 * Hatch Probe Pivot *
 	 *************************************************************************/

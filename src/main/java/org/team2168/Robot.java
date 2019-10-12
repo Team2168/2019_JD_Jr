@@ -7,36 +7,71 @@
 
 package org.team2168;
 
+import org.team2168.subsystems.Drivetrain;
+
+import org.team2168.utils.Debouncer;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
+
+
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the TimedRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.gradle file in the
- * project.
+ * project
  */
-public class Robot extends TimedRobot {
-  private static final String kDefaultAuto = "Default";
-  private static final String kCustomAuto = "My Auto";
-  private String m_autoSelected;
-  private final SendableChooser<String> m_chooser = new SendableChooser<>();
-
+public class Robot extends TimedRobot
+ {
   // Operator Interface
   public static OI oi;
 
-  /**
-   * This function is run when the robot is first started up and should be
-   * used for any initialization code.
-   */
+  // Subsystems
+  public static Drivetrain drivetrain;
+
+    
+  // gyro calibration
+  static boolean autoMode;
+  private static boolean matchStarted = false;
+  public static int gyroReinits;
+  private double lastAngle;
+  private Debouncer gyroDriftDetector = new Debouncer(1.0);
+  public static boolean gyroCalibrating = false;
+  private boolean lastGyroCalibrating = false;
+  private double curAngle = 0.0;
+
+  public static boolean isClimbEnabled = false;
+
   @Override
-  public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
-    m_chooser.addOption("My Auto", kCustomAuto);
-    SmartDashboard.putData("Auto choices", m_chooser);
+  public void robotInit()
+  {
+
+    try
+    {
+      // Stop all WPILib 2018 Telementry
+      LiveWindow.disableAllTelemetry();
+
+      ConsolePrinter.init();
+      ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
+
+      // Instantiate the subsystems
+      drivetrain = Drivetrain.getInstance();
+   
+
+      drivetrain.calibrateGyro();
+
+      oi = OI.getInstance();
+
+      System.out.println("Robot Initialization Complete!!");
+
+    }
   }
+  
 
   /**
    * This function is called every robot packet, no matter the mode. Use
@@ -63,9 +98,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // m_autoSelected = SmartDashboard.getString("Auto Selector", kDefaultAuto);
-    System.out.println("Auto selected: " + m_autoSelected);
+
   }
 
   /**
@@ -73,15 +106,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    switch (m_autoSelected) {
-      case kCustomAuto:
-        // Put custom auto code here
-        break;
-      case kDefaultAuto:
-      default:
-        // Put default auto code here
-        break;
-    }
+
   }
 
   /**
@@ -91,10 +116,69 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
   }
 
+
+  public void teleopInit()
+  {
+    // callArduino();
+    autoMode = false;
+    matchStarted = true;
+    drivetrain.stopGyroCalibrating();
+  }
+
+    /**
+   * @return true if the robot is in auto mode
+   */
+  public static boolean isAutoMode()
+  {
+    return autoMode;
+
+  }
+
+    /**
+   * @return true if the robot is in climb mode
+   */
+  public static boolean isClimbMode()
+  {
+    return isClimbEnabled;
+
+  }
+
   /**
    * This function is called periodically during test mode.
    */
   @Override
   public void testPeriodic() {
+  }
+
+    /**
+   * Method which checks to see if gyro drifts and resets the gyro. Call this in a
+   * loop.
+   */
+  private void gyroReinit()
+  {
+    // Check to see if the gyro is drifting, if it is re-initialize it.
+    // Thanks FRC254 for orig. idea.
+    curAngle = drivetrain.getHeading();
+    gyroCalibrating = drivetrain.isGyroCalibrating();
+
+    if (lastGyroCalibrating && !gyroCalibrating)
+    {
+      // if we've just finished calibrating the gyro, reset
+      gyroDriftDetector.reset();
+      curAngle = drivetrain.getHeading();
+      System.out.println("Finished auto-reinit gyro");
+    }
+    else if (gyroDriftDetector.update(Math.abs(curAngle - lastAngle) > (0.75 / 50.0)) && !matchStarted
+        && !gyroCalibrating)
+    {
+      // && gyroReinits < 3) {
+      gyroReinits++;
+      System.out.println("!!! Sensed drift, about to auto-reinit gyro (" + gyroReinits + ")");
+      drivetrain.calibrateGyro();
+    }
+
+    lastAngle = curAngle;
+    lastGyroCalibrating = gyroCalibrating;
+
   }
 }
