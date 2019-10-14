@@ -18,14 +18,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class IntakePivot extends Subsystem {
   private static IntakePivot instance = null;
-  private static DoubleSolenoid PivotRobot;
+  private static DoubleSolenoid pivotRobot;
 
   public IntakePivot() 
   {
-    PivotRobot = new DoubleSolenoid(RobotMap.PIVOT_EXTENDS_PCM, RobotMap.PIVOT_RETRACTS_PCM);
+    pivotRobot = new DoubleSolenoid(RobotMap.PIVOT_EXTENDS_PCM, RobotMap.PIVOT_RETRACTS_PCM);
   }
   
-  public static IntakePivot getinstance()
+  public static IntakePivot getInstance()
   {
     if (instance == null)
         instance = new IntakePivot();
@@ -37,7 +37,7 @@ public class IntakePivot extends Subsystem {
    */
   public void pivotIntakeUp()
   {
-    PivotRobot.set(DoubleSolenoid.Value.kForward);
+    pivotRobot.set(DoubleSolenoid.Value.kForward);
   }
 
   /**
@@ -45,18 +45,18 @@ public class IntakePivot extends Subsystem {
    */
   public void pivotIntakeDown()
   {
-    PivotRobot.set(DoubleSolenoid.Value.kReverse);
+    pivotRobot.set(DoubleSolenoid.Value.kReverse);
   }
 
   public boolean isPivotIntakeUp()
   {
-    return PivotRobot.get() == Value.kForward;
+    return pivotRobot.get() == Value.kForward;
 
   }
   
   public boolean isPivotIntakeDown()
   {
-    return PivotRobot.get() == Value.kReverse;
+    return pivotRobot.get() == Value.kReverse;
   }
 
   public void initDefaultCommand() {
