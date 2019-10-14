@@ -22,7 +22,7 @@ public class HatchManipulator extends Subsystem {
 private HatchManipulator()
 {
     _dSolenoidExtend = new DoubleSolenoid(RobotMap.HATCH_EXTENSION_PCM, RobotMap.HATCH_RETRACTION_PCM);
-    _limitSwitch = new CanDigitalInput(Robot.);
+    _limitSwitch = new CanDigitalInput(Robot.); //TO DO
   //  _hatchCheck1 = new DigitalInput(RobotMap.CHECK_ONE);
   //  _hatchCheck2 = new DigitalInput(RobotMap.CHECK_TWO);
   //  _hatchCheck3 = new DigitalInput(RobotMap.CHECK_THREE);
