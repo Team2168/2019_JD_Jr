@@ -5,15 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands ;
+package org.team2168.commands;
+
+import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class DriveCargoIntakeWithJoyStick extends Command {
-  public static double maxSpitSpeed = 0.35;
+public class DriveCargoIntakeWithJoystick extends Command {
+  private static double maxSpitSpeed = 0.35; 
 
-  public DriveCargoIntakeWithJoyStick() {
-    requires(Robot.cargoIntakeWheels);
+  public DriveCargoIntakeWithJoystick() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
@@ -21,20 +22,19 @@ public class DriveCargoIntakeWithJoyStick extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() 
-    {
-    if(Robot.oi.getCargoIntakeJoystickValue()<maxSpitSpeed){
-      Robot.cargoIntakeWheels.drive(Robot.oi.getCargoIntakeJoystickValue());
-    }
-    else
-    {
-      Robot.cargoIntakeWheels.drive(maxSpitSpeed);
-    }
+  protected void execute() {
+    if(Robot.oi.getCargoIntakeJoystickValue()<maxSpitSpeed)
+		{
+			Robot.cargoIntake.drive(Robot.oi.getCargoIntakeJoystickValue());
+		}
+		else
+		{
+			Robot.cargoIntake.drive(maxSpitSpeed);
+		}
   }
 
   // Make this return true when this Command no longer needs to run execute()

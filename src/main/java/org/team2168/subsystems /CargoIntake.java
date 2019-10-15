@@ -8,7 +8,11 @@
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import org.team2168.Robot;
 import org.team2168.RobotMap;
+import org.team2168.PID.sensors.CanAnalogInput;
+import org.team2168.commands.DriveCargoIntakeWithJoyStick;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 /**
@@ -17,24 +21,37 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class CargoIntake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
+  private CanAnalogInput _sharpIRSensor;
   private TalonSRX intakeMotor;
   public static CargoIntake instance;
   private CargoIntake() {
+    _sharpIRSensor = new CanAnalogInput(intakeMotor, CanAnalogInput.kSCALE_3_3_VOLTS);
     intakeMotor = new TalonSRX(RobotMap.CARGO_INTAKE_MOTOR_PDP);
+    ConsolePrinter.putNumber("Cargo Raw IR", () -> {return getRawIRVoltage();}, true, false);
+    ConsolePrinter.putBoolean("isCargoPresent", () -> {return isCargoPresent();}, true, false);
   }
-  public void cargoIntake(double speed){
+  public void driveCargoIntakeMotor(double speed){
     if (RobotMap.CARGO_INTAKE_MOTOR_REVERSE)
-          speed = -speed;
-          intakeMotor.set(ControlMode.PercentOutput,speed);
+    speed = -speed;
+    intakeMotor.set(ControlMode.PercentOutput,speed);
   }
   public static CargoIntake getInstence()
 	{
 	 if (instance==null)
 	 instance = new CargoIntake();
 	 return instance;
-	}
+  }
+  public boolean isCargoPresent()
+  {
+      return (getRawIRVoltage() >= RobotMap.CARGO_INTAKE_IR_THRESHOLD_MIN && getRawIRVoltage() <= RobotMap.CARGO_INTAKE_IR_THRESHOLD_MAX);
+  }
+  public double getRawIRVoltage()
+    {
+        return _sharpIRSensor.getVoltage();
+    }
   @Override
   public void initDefaultCommand() {
+    setDefaultCommand(new DriveCargoIntakeWithJoyStick());
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
   }
