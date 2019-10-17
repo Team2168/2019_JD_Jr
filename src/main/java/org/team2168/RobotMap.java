@@ -129,7 +129,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int PROBE_ENGAGE_PCM = 3;
 	public static final int PROBE_DISENGAGE_PCM = 4;
 
-
+	public static final int PIVOT_EXTENDS_PCM = 1;
+	public static final int PIVOT_RETRACTS_PCM = 2;
 
 	/*************************************************************************
 	*                         PDP/CAN DEVICES                                 *

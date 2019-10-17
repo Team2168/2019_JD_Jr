@@ -7,9 +7,11 @@
 
 package org.team2168;
 
+
 import org.team2168.commands.autos.DoNothing;
 import org.team2168.subsystems.VacuumClimberLift;
 import org.team2168.subsystems.VacuumClimberPump;
+import org.team2168.subsystems.IntakePivot;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
@@ -35,6 +37,7 @@ public class Robot extends TimedRobot {
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  public static IntakePivot intakePivot;
 
   // Operator Interface
   public static OI oi;
@@ -95,6 +98,7 @@ public class Robot extends TimedRobot {
 
       vacuumClimberLift = VacuumClimberLift.getInstance();
       vacuumClimberPump = VacuumClimberPump.getInstance();
+      intakePivot = IntakePivot.getInstance();
 
       drivetrain.calibrateGyro();
       driverstation = DriverStation.getInstance();
