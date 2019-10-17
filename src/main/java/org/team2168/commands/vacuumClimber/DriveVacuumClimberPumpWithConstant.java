@@ -33,9 +33,6 @@ public class DriveVacuumClimberPumpWithConstant extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    if (_speed == 0.0)
-    return true;
-  else
     return false;
   }
 
