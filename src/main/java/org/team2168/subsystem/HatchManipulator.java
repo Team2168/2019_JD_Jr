@@ -9,24 +9,17 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class HatchManipulator extends Subsystem {
-    private DoubleSolenoid _dSolenoidExtend;
+    private DoubleSolenoid _hatchPiston;
     private CanDigitalInput _limitSwitch;
     private static HatchManipulator instance = null;
    
 
-  //  private DigitalInput _hatchCheck2;
-  //  private DigitalInput _hatchCheck3;
-  //  private DigitalInput _hatchCheck4;
 
 
 private HatchManipulator()
 {
-    _dSolenoidExtend = new DoubleSolenoid(RobotMap.HATCH_EXTENSION_PCM, RobotMap.HATCH_RETRACTION_PCM);
+    _hatchPiston = new DoubleSolenoid(RobotMap.HATCH_EXTENSION_PCM, RobotMap.HATCH_RETRACTION_PCM);
     _limitSwitch = new CanDigitalInput(Robot.); //TO DO
-  //  _hatchCheck1 = new DigitalInput(RobotMap.CHECK_ONE);
-  //  _hatchCheck2 = new DigitalInput(RobotMap.CHECK_TWO);
-  //  _hatchCheck3 = new DigitalInput(RobotMap.CHECK_THREE);
-  //  _hatchCheck4 = new DigitalInput(RobotMap.CHECK_FOUR);
   ConsolePrinter.putNumber("HatchManipulator Raw IR", () -> {return getRawIRVoltage();}, true, false);
   ConsolePrinter.putBoolean("Hatch Is Present", () -> {return isHatchPresent();}, true, false);
   ConsolePrinter.putBoolean("Manipulator is Extended", () -> {return isManipulatorExtended();}, true, false);
@@ -34,12 +27,12 @@ private HatchManipulator()
 }
 public void extend()
 {
-    _dSolenoidExtend.set(Value.kForward);
+    _hatchPiston.set(Value.kForward);
 }
 
 public void retract()
 {
-    _dSolenoidExtend.set(Value.kReverse);
+    _hatchPiston.set(Value.kReverse);
 }
 
 public static HatchManipulator getInstance(){
@@ -55,12 +48,12 @@ return _limitSwitch.getForwardLimit();
 
 public boolean isManipulatorExtended()
 {
-    return _dSolenoidExtend.get() == Value.kForward;
+    return _hatchPiston.get() == Value.kForward;
 }
 
 public boolean isManipulatorRetracted()
     {
-        return _dSolenoidExtend.get() == Value.kReverse;
+        return _hatchPiston.get() == Value.kReverse;
     }
 
 

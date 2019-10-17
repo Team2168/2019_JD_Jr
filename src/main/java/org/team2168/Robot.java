@@ -9,7 +9,6 @@ package org.team2168;
 
 import org.team2168.subsystem.HatchManipulator;
 
-//import org.team2168.subsystem.HatchManipulator;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
