@@ -7,8 +7,6 @@
 
 package org.team2168.commands.Lift;
 
-import javax.lang.model.util.ElementScanner6;
-
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.subsystems.Lift;
@@ -44,7 +42,7 @@ public class DriveLiftWithJoysticks extends Command {
       }
       else
         Robot.lift.driveAllMotors(Robot.oi.getLiftJoystickValue() * RobotMap.LIFT_MAX_JOYSTICK_SPEED);
-
+      
       }
       else
         Robot.lift.driveAllMotors(Robot.oi.getLiftJoystickValue()*RobotMap.LIFT_MAX_JOYSTICK_SPEED);
