@@ -43,9 +43,9 @@ public class OI
 
 	private LinearInterpolator gunStyleInterpolator;
 	private double[][] gunStyleArray = { { -1.0, -1.0},
-										 { -0.15, 0.0},
-										 {  0.15, 0.0},
-										 {  1.0,  1.0}};
+										{ -0.15, 0.0},
+										{  0.15, 0.0},
+										{  1.0,  1.0}};
 
 	/**
 	 * Private constructor for singleton class which instantiates the OI object
@@ -132,7 +132,7 @@ public class OI
 	public double getHatchProbePivotJoystickValue()
 	{
 
-			return operatorJoystick.getRightStickRaw_Y();
+		return operatorJoystick.getRightStickRaw_Y();
 	}
 
 	public double getCargoIntakeJoystickValue()
@@ -143,7 +143,7 @@ public class OI
 
 	/*************************************************************************
 	 *Monkey Bar Pivot *
-	 *************************************************************************/
+	*************************************************************************/
 	public double getMonkeyBarPivotJoystickValue()
 	{
 
@@ -157,12 +157,17 @@ public class OI
 	}
 
 	/*************************************************************************
-	 *Hatch Floor Motor*
+	 *Vacuum Climber Lift & Pump*
 	*************************************************************************/
-	public double getHatchFloorIntakeJoystickValue()
+	public double getVacuumClimberLiftJoystickValue()
 	{
-		return 0;//operatorJoystick.getLeftStickRaw_X();
+		return -operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
 	}
+
+	public double getVacuumClimberPumpJoystickValue()
+	{
+		return operatorJoystick.getLeftStickRaw_Y();
+	} 
 
 	/*************************************************************************
 	 * Drivetrain *
