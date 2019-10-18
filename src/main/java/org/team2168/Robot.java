@@ -134,14 +134,30 @@ public class Robot extends TimedRobot
 
   }
 
-    /**
-   * @return true if the robot is in climb mode
-   */
-  public static boolean isClimbMode()
+  public static String getControlStyleName()
   {
-    return isClimbEnabled;
+    String retVal = "";
 
-  }
+    switch (controlStyle)
+    {
+    case 0:
+      retVal = "Tank Drive";
+      break;
+    case 1:
+      retVal = "Gun Style";
+      break;
+    case 2:
+      retVal = "Arcade Drive";
+      break;
+    case 3:
+      retVal = "GTA Drive";
+      break;
+    case 4:
+      retVal = "New Gun Style";
+      break;
+    default:
+      retVal = "Invalid Control Style";
+    }
 
   /**
    * This function is called periodically during test mode.

@@ -96,11 +96,10 @@ public class Drivetrain extends Subsystem {
         RobotMap.LEFT_DRIVE_TRAIN_ENCODER_REVERSE, RobotMap.DRIVE_ENCODING_TYPE, RobotMap.DRIVE_SPEED_RETURN_TYPE,
         RobotMap.DRIVE_POS_RETURN_TYPE, RobotMap.DRIVE_AVG_ENCODER_VAL);
 
-    // TODO: check if need to add xMotorx.setSmartCurrent(60)
-    // leftMotor1.setSmartCurrentLimit(60);
-    // leftMotor2.setSmartCurrentLimit(60);
-    // rightMotor1.setSmartCurrentLimit(60);
-    // rightMotor2.setSmartCurrentLimit(60);
+    leftMotor1.setSmartCurrentLimit(60);
+    leftMotor2.setSmartCurrentLimit(60);
+    rightMotor1.setSmartCurrentLimit(60);
+    rightMotor2.setSmartCurrentLimit(60);
 
     //control frame every 20ms
     leftMotor1.setControlFramePeriodMs(20);
@@ -111,7 +110,8 @@ public class Drivetrain extends Subsystem {
      //status frame every 500ms
     leftMotor1.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);
     leftMotor2.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);
-    rightMotor1.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);     rightMotor2.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);
+    rightMotor1.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);     
+    rightMotor2.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);
 
      //status frame every 500ms
     leftMotor1.setPeriodicFramePeriod(PeriodicFrame.kStatus1,500);
@@ -297,10 +297,6 @@ public class Drivetrain extends Subsystem {
   
 }
 
-  // TODO: ADD JAVADOCS using /** */
-
-  // dont worry about IR sensors
-
   public static Drivetrain getInstance() {
     if (instance == null)
       instance = new Drivetrain();
@@ -308,37 +304,45 @@ public class Drivetrain extends Subsystem {
   }
 
   private void driveLeftMotor1(double speed) {
-    leftMotor1.set(speed);
-
-    // DT_REVERSE_XMOTOR dependant on hardware on robot, keeping because ctrl+x is
+       // DT_REVERSE_XMOTOR dependant on hardware on robot, keeping because ctrl+x is
     // easier than than typing
     if (RobotMap.DT_REVERSE_LEFT1) {
       speed = -speed;
     }
+
+    leftMotor1.set(speed);
+    leftMotor1Voltage = Robot.pdp.getBatteryVoltage() * speed;
+
   }
 
   private void driveLeftMotor2(double speed) {
-    leftMotor2.set(speed);
-
     if (RobotMap.DT_REVERSE_LEFT2) {
       speed = -speed;
     }
+
+    leftMotor2.set(speed);
+    leftMotor2Voltage = Robot.pdp.getBatteryVoltage() * speed;
+
   }
 
   private void driveRightMotor1(double speed) {
-    rightMotor1.set(speed);
-
     if (RobotMap.DT_REVERSE_RIGHT1) {
       speed = -speed;
     }
+
+    rightMotor1.set(speed);
+    rightMotor1Voltage = Robot.pdp.getBatteryVoltage() * speed;
+
   }
 
   private void driveRightMotor2(double speed) {
-    rightMotor2.set(speed);
-
     if (RobotMap.DT_REVERSE_RIGHT2) {
       speed = -speed;
     }
+
+    rightMotor2.set(speed);
+    rightMotor2Voltage = Robot.pdp.getBatteryVoltage() * speed;
+
   }
 
   public void driveLeft(double speed) {
@@ -355,13 +359,25 @@ public class Drivetrain extends Subsystem {
   {
     if (!Robot.isAutoMode())
     {
-      //TODO: get lift position
-      if (Robot.lift.getPotPos() > 50);
+      if (Robot.lift.getPotPos() > 50)
       {
         leftSpeed = leftSpeed;
         rightSpeed = rightSpeed;
       }
     }
+    else
+    {
+      if (Robot.lift.getPotPos() > 30)
+      {
+        leftSpeed = leftSpeed * 0.3;
+        rightSpeed = rightSpeed * 0.3;
+      }
+    }
+
+    runTime = Timer.getFPGATimestamp();
+    driveLeft(leftSpeed);
+    driveRight(rightSpeed);
+    SmartDashboard.putNumber("TankDriveSetCanTime", Timer.getFPGATimestamp() - runTime);
   }
 
   /**
