@@ -446,6 +446,11 @@ public class Drivetrain extends Subsystem {
     return rightMotor1Voltage;
   }
 
+  public void startGyroCalibrating()
+  {
+    _gyroSPI.startCalibrating();
+  }
+  
   /**
    * Returns the last commanded voltage of right Motor 2
    * 
