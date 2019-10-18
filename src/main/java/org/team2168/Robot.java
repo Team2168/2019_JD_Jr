@@ -8,10 +8,12 @@
 package org.team2168;
 
 import org.team2168.commands.autos.DoNothing;
+import org.team2168.commands.pneumatics.StartCompressor;
+import org.team2168.subsystem.HatchManipulator;
+import org.team2168.subsystems.IntakePivot;
+import org.team2168.subsystems.Pneumatics;
 import org.team2168.subsystems.VacuumClimberLift;
 import org.team2168.subsystems.VacuumClimberPump;
-import org.team2168.subsystems.IntakePivot;
-import org.team2168.subsystem.HatchManipulator;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
@@ -59,6 +61,7 @@ public class Robot extends TimedRobot {
 
  // PDP Instance
   public static PowerDistribution pdp;
+  public static Pneumatics pneumatics; 
 
   // Driverstation Instance
   public static DriverStation driverstation;
@@ -95,7 +98,7 @@ public class Robot extends TimedRobot {
       SmartDashboard.putData("Auto choices", m_chooser);
 
       ConsolePrinter.init();
-      ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS)
+      ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
 
       vacuumClimberLift = VacuumClimberLift.getInstance();
       vacuumClimberPump = VacuumClimberPump.getInstance();
@@ -104,10 +107,13 @@ public class Robot extends TimedRobot {
 
       drivetrain.calibrateGyro();
       driverstation = DriverStation.getInstance();
+      pneumatics = Pneumatics.getInstance();
 
       // Starting PDP
-      pdp = new PowerDistribution(RobotMap.PDPThreadPeriod);
+      pdp = PowerDistribution.getInstance();
       pdp.startThread();
+
+
 
           /*******************************************************
        *                    
