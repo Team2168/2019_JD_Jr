@@ -12,6 +12,7 @@ import org.team2168.subsystems.VacuumClimberLift;
 import org.team2168.subsystems.VacuumClimberPump;
 import org.team2168.subsystems.IntakePivot;
 import org.team2168.subsystem.HatchManipulator;
+import org.team2168.subsystems.CargoIntake;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
@@ -39,10 +40,11 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   public static HatchManipulator hatchManipulator;
   public static IntakePivot intakePivot;
+  public static CargoIntake cargoIntake;
 
   // Operator Interface
   public static OI oi;
-
+  
   //climber
   public static VacuumClimberLift vacuumClimberLift;
   public static VacuumClimberPump vacuumClimberPump;
@@ -78,9 +80,6 @@ public class Robot extends TimedRobot {
   // Keep track of time
   double runTime = Timer.getFPGATimestamp();
 
-
-  //
-
   /**
    * This function is run when the robot is first started up and should be
    * used for any initialization code.
@@ -101,7 +100,8 @@ public class Robot extends TimedRobot {
       vacuumClimberPump = VacuumClimberPump.getInstance();
       intakePivot = IntakePivot.getInstance();
       hatchManipulator = HatchManipulator.getInstance();
-
+      cargoIntake = CargoIntake.getInstance();
+      
       drivetrain.calibrateGyro();
       driverstation = DriverStation.getInstance();
 
