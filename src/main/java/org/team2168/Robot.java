@@ -11,7 +11,7 @@ import org.team2168.commands.autos.DoNothing;
 import org.team2168.subsystems.VacuumClimberLift;
 import org.team2168.subsystems.VacuumClimberPump;
 import org.team2168.subsystems.IntakePivot;
-import org.team2168.subsystem.HatchManipulator;
+import org.team2168.subsystems.HatchManipulator;
 import org.team2168.subsystems.CargoIntake;
 import org.team2168.subsystems.Lift;
 import org.team2168.utils.Debouncer;

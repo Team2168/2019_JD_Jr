@@ -13,7 +13,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import org.team2168.Robot;
 import org.team2168.RobotMap;
-import org.team2168.Commands.Lift.DriveLiftWithJoysticks;
+import org.team2168.commands.Lift.DriveLiftWithJoysticks;
 import org.team2168.PID.sensors.AveragePotentiometer;
 
 import edu.wpi.first.wpilibj.DigitalInput;
