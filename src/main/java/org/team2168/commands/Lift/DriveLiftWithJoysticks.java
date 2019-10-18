@@ -31,10 +31,9 @@ public class DriveLiftWithJoysticks extends Command {
   protected void execute() {
   if(RobotMap.LIFT_ENABLE_HEIGHT_HOLD){
       double holdingSpeed = RobotMap.LIFT_HOLDING_VOLTAGE/Robot.pdp.getBatteryVoltage();
-      //@todo pdp doesn't exist?
       if(Math.abs(Math.abs(Robot.oi.getLiftJoystickValue()))<holdingSpeed){
         if(Lift.GetInstance().getPotPos() <= RobotMap.LIFT_ZERO_BELOW_THIS_HEIGHT){
-          Robot.lift.driveAllMotors(-holdingSpeed);
+          Robot.lift.driveAllMotors(-holdingSpeed);//+0.01
         }
         else{
           Robot.lift.driveAllMotors(holdingSpeed);
@@ -46,7 +45,7 @@ public class DriveLiftWithJoysticks extends Command {
       }
       else
         Robot.lift.driveAllMotors(Robot.oi.getLiftJoystickValue()*RobotMap.LIFT_MAX_JOYSTICK_SPEED);
-}
+  }
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

@@ -56,15 +56,22 @@ public class Lift extends Subsystem {
   private boolean isSensorValid=true;
 
 
-
+  /**
+   * subsystem class for the lift
+   */
   private Lift(){
     liftMotor1=new TalonSRX(RobotMap.LIFT_MOTOR_1_PDP);
     liftMotor2=new VictorSPX(RobotMap.LIFT_MOTOR_2_PDP);
-    liftPot=new AveragePotentiometer(liftMotor1,RobotMap.LIFT_POT_VOLTAGE_0,RobotMap.LIFT_POT_0_HEIGHT_INCHES,RobotMap.LIFT_POT_VOLTAGE_MAX,RobotMap.LIFT_POT_MAX_HEIGHT_INCHES, RobotMap.LIFT_AVG_ENCODER_VAL); 
+    liftPot=new AveragePotentiometer(liftMotor1,RobotMap.LIFT_POT_VOLTAGE_0,
+    RobotMap.LIFT_POT_0_HEIGHT_INCHES,RobotMap.LIFT_POT_VOLTAGE_MAX,
+    RobotMap.LIFT_POT_MAX_HEIGHT_INCHES, RobotMap.LIFT_AVG_ENCODER_VAL); 
+
     liftFullyUp=new DigitalInput(RobotMap.LIFT_FULLY_UP_LIMIT);
     liftFullyDown=new DigitalInput(RobotMap.LIFT_FULLY_DOWN_LIMIT);
 
-    liftPOTController=new PIDPosition("LiftPOSController",RobotMap.LIFT_P,RobotMap.LIFT_I,RobotMap.LIFT_D,liftPot,RobotMap.LIFT_PID_PERIOD);
+    liftPOTController=new PIDPosition("LiftPOSController",RobotMap.LIFT_P,
+    RobotMap.LIFT_I,RobotMap.LIFT_D,liftPot,RobotMap.LIFT_PID_PERIOD);
+
     liftPOTController.setSIZE(RobotMap.LIFT_PID_ARRAY_SIZE);
     liftPOTController.startThread();
     TCPLiftPOTController=new TCPSocketSender(RobotMap.TCP_SERVER_LIFT_POT_CONTROLLER, liftPOTController);
@@ -93,7 +100,9 @@ public class Lift extends Subsystem {
   }
 
 
-
+  /**
+   * singleton constructor of the lift
+   */
   public static Lift GetInstance(){
     if (_instance==null)
 
@@ -104,29 +113,57 @@ public class Lift extends Subsystem {
 
   
 
-  
+    /**
+   * Compares the current of this motor to the current of the other motor in the gearbox,
+   * and if it is less than some percentage of the other motor it is considered to be driving different, 
+   * and a fault is thrown to be checked later.
+   * 
+   * Once a fault has been thrown it will not be reset until the robot is reset.
+   * 
+   * TODO: Write to a file for between bot shutdown persistance
+   */
   private void isLiftMotor1Failure(){
     double conditionLimitPercent=0.5;
 
     if(!this.liftMotor1Fault && this.liftMotor1Voltage >=RobotMap.LIFT_MIN_SPEED){
-        this.liftMotor1Fault=((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)<=conditionLimitPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)&&Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)>2));
+        this.liftMotor1Fault=((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)
+        <=conditionLimitPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)
+        &&Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)>2));
 
     }
   }
 
 
 
-
+  /**
+   * Compares the current of this motor to the current of the other motor in the gearbox,
+   * and if it is less than some percentage of the other motor it is considered to be driving different, 
+   * and a fault is thrown to be checked later.
+   * 
+   * Once a fault has been thrown it will not be reset until the robot is reset.
+   * 
+   * TODO: Write to a file for between bot shutdown persistance
+   */
   private void isLiftMotor2Failure(){
     double conditionLimitPercent=0.5;
 
-    if(!this.liftMotor2Fault && this.liftMotor1Voltage >=RobotMap.LIFT_MIN_SPEED){
-      this.liftMotor2Fault=((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)<=conditionLimitPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)&&Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)>2));
+    if(!this.liftMotor2Fault && this.liftMotor2Voltage >=RobotMap.LIFT_MIN_SPEED){
+      this.liftMotor2Fault=((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)
+      <=conditionLimitPercent*Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)
+      &&Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)>2));
     }
   }
 
 
-
+  /**
+   * Checks for voltage spikes above the maximum for a breaker to trip,
+   * followed by no voltage, followed by normal voltage.  
+   * 
+   * if no voltage returns, we assume this is a blown motor or other motor fault,
+   * rather than a tripped breaker.
+   * 
+   * TODO: Write to file for between bot persistance
+   */
   private void isLiftMotor1BreakerTrip(){
     //the motor is moving, and we are seeing if it overdrew current, tripping a breaker
     if(this.liftMotor1Voltage >= RobotMap.LIFT_MIN_SPEED){
@@ -144,7 +181,15 @@ public class Lift extends Subsystem {
   }
 
 
-
+  /**
+   * Checks for voltage spikes above the maximum for a breaker to trip,
+   * followed by no voltage, followed by normal voltage.  
+   * 
+   * if no voltage returns, we assume this is a blown motor or other motor fault,
+   * rather than a tripped breaker.
+   * 
+   * TODO: Write to file for between bot persistance
+   */
   private void isLiftMotor2BreakerTrip(){
     if(this.liftMotor2Voltage>=RobotMap.LIFT_MIN_SPEED){
       if(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP)>15)
@@ -157,7 +202,11 @@ public class Lift extends Subsystem {
   }
 
 
-  
+  /**
+ * drives the first lift motor (as outlined in RobotMap) at a speed between -1 and 1, 
+ * where 1 is up
+ * @param speed a double, +1 is up and -1 is down
+ */
   private void driveLiftMotor1(double speed){
     if (RobotMap.LIFT_MOTOR1_REVERSE)
       speed=-speed;
@@ -167,7 +216,11 @@ public class Lift extends Subsystem {
 
 
 
-
+/**
+ * drives the second lift motor (as outlined in RobotMap) at a speed between -1 and 1, 
+ * where 1 is up and -1 is down.
+ * @param speed a double, +1 is up and -1 is down
+ */
   private void driveLiftMotor2(double speed){
     if (RobotMap.LIFT_MOTOR2_REVERSE)
       speed=-speed;
@@ -177,13 +230,18 @@ public class Lift extends Subsystem {
 
 
 
-
+/**
+ * Drives all lift motors with a value from -1 to 1, where 1 is up and -1 is down.
+ * This method includes safety checks.
+ * @param speed a double, +1 is up and -1 is down
+ */
   public void driveAllMotors(double speed){
     
     double stallLimit=35;
     //lift is stalling
 
-    if((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)>stallLimit)||(Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > stallLimit)){
+    if((Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_1_PDP)>stallLimit)||
+    (Robot.pdp.getChannelCurrent(RobotMap.LIFT_MOTOR_2_PDP) > stallLimit)){
       //i didn't include the timeCounter part because this lift has no break
       driveLiftMotor1(0.0);
       driveLiftMotor2(0.0);
@@ -194,6 +252,12 @@ public class Lift extends Subsystem {
         
         if((speed>RobotMap.LIFT_MIN_SPEED&&!isLiftFullyUp() && !liftPot.isAtUpperLimit()) ||
          ((speed<-RobotMap.LIFT_MIN_SPEED) && !isLiftFullyDown())){
+        
+          //if the lift is driving, the potentiometer should reflect that
+          if(Math.abs(liftPot.getRate())<1)
+            isSensorValid=false;
+          else
+            isSensorValid=true;
 
         driveLiftMotor1(speed);
         driveLiftMotor2(speed);    
@@ -230,47 +294,59 @@ public class Lift extends Subsystem {
       System.out.println("is this working?");
     }
 
-  /* 
-    //if the lift is driving, the potentiometer should reflect that
-    if(Math.abs(liftPot.getRate())<1)
-      isSensorValid=false;
-    else
-      isSensorValid=true;
- */
-
-
 
   }
+
+
+  /**
+   * Gets the raw voltage from the lift potentiometer
+   * @return a double, representing the position of the lift potentiometer in volts
+   */
   public double getRawPot(){
     return liftPot.getRawPos();
   }
 
 
-
+  /**
+   * Gets the position of the lift potentiometer, in inches
+   * @return a double, representing the position of the lift potentiometer in inches
+   */
   public double getPotPos(){
     return liftPot.getPos();
   }
 
   
-
+  /**
+   * Gets the current speed of the lift potentiometer, in inches per second
+   * @return a double, representing the current speed of the lift potentiometer in inches per second
+   */
   public double getPotRate(){
     return liftPot.getRate();
   }
 
 
-
+  /**
+   * Checks to see if the lift is fully raised
+   * @return a boolean, true if fully up, false if not
+   */
   public Boolean isLiftFullyUp(){
     return !liftFullyUp.get();
   }
 
 
-
+    /**
+   * Checks to see if the lift is fully lowered
+   * @return a boolean, true if fully down, false if not
+   */
   public Boolean isLiftFullyDown(){
     return !liftFullyDown.get();
   }
 
 
-
+  /**
+   * checks to see if the potentiometer is operating correctly
+   * @return a boolean, true if working, false if not
+   */
   public boolean isSensorValid(){
     return this.isSensorValid;
   }
