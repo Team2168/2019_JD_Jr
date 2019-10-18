@@ -7,6 +7,8 @@
 
 package org.team2168.commands.Lift;
 
+import javax.lang.model.util.ElementScanner6;
+
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.subsystems.Lift;
@@ -17,7 +19,7 @@ public class DriveLiftWithJoysticks extends Command {
   public DriveLiftWithJoysticks() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Lift.GetInstance());
+    requires(Robot.lift);
   }
 
   // Called just before this Command runs the first time
@@ -29,8 +31,7 @@ public class DriveLiftWithJoysticks extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-  if(RobotMap.LIFT_ENABLE_HEIGHT_HOLD)
-    {
+  if(RobotMap.LIFT_ENABLE_HEIGHT_HOLD){
       double holdingSpeed = RobotMap.LIFT_HOLDING_VOLTAGE/Robot.pdp.getBatteryVoltage();
       //@todo pdp doesn't exist?
       if(Math.abs(Math.abs(Robot.oi.getLiftJoystickValue()))<holdingSpeed){
@@ -41,12 +42,13 @@ public class DriveLiftWithJoysticks extends Command {
           Robot.lift.driveAllMotors(holdingSpeed);
         }
       }
-      else{
+      else
         Robot.lift.driveAllMotors(Robot.oi.getLiftJoystickValue() * RobotMap.LIFT_MAX_JOYSTICK_SPEED);
-      }
-    }
-  }
 
+      }
+      else
+        Robot.lift.driveAllMotors(Robot.oi.getLiftJoystickValue()*RobotMap.LIFT_MAX_JOYSTICK_SPEED);
+}
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {

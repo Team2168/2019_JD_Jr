@@ -19,7 +19,7 @@ public class DriveLiftWithConstant extends Command {
   public DriveLiftWithConstant(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Lift.GetInstance());
+    requires(Robot.lift);
 
     _speed=speed;
   }
