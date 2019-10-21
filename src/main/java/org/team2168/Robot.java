@@ -11,8 +11,9 @@ import org.team2168.commands.autos.DoNothing;
 import org.team2168.subsystems.VacuumClimberLift;
 import org.team2168.subsystems.VacuumClimberPump;
 import org.team2168.subsystems.IntakePivot;
-import org.team2168.subsystem.HatchManipulator;
+import org.team2168.subsystems.HatchManipulator;
 import org.team2168.subsystems.CargoIntake;
+import org.team2168.subsystems.Lift;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
@@ -41,6 +42,7 @@ public class Robot extends TimedRobot {
   public static HatchManipulator hatchManipulator;
   public static IntakePivot intakePivot;
   public static CargoIntake cargoIntake;
+  public static Lift lift;
 
   // Operator Interface
   public static OI oi;
@@ -86,7 +88,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-  
     try
     {
       m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
@@ -94,13 +95,14 @@ public class Robot extends TimedRobot {
       SmartDashboard.putData("Auto choices", m_chooser);
 
       ConsolePrinter.init();
-      ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS)
+      ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
 
       vacuumClimberLift = VacuumClimberLift.getInstance();
       vacuumClimberPump = VacuumClimberPump.getInstance();
       intakePivot = IntakePivot.getInstance();
       hatchManipulator = HatchManipulator.getInstance();
       cargoIntake = CargoIntake.getInstance();
+      lift = Lift.GetInstance();
       
       drivetrain.calibrateGyro();
       driverstation = DriverStation.getInstance();

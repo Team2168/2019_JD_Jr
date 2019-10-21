@@ -5,45 +5,52 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.hatch_manipulator;
+package org.team2168.commands.Lift;
+
+import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2168.Robot;
-import org.team2168.subsystems.HatchManipulator;
 
-public class Hatch_Retract extends Command {
-  public Hatch_Retract() {
+public class DriveLiftWithConstant extends Command {
+
+  double _speed;
+
+  public DriveLiftWithConstant(double speed) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.lift);
+
+    _speed=speed;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.lift.driveAllMotors(0.0);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulator.retract();
+    Robot.lift.driveAllMotors(_speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() 
-  {
-   return Robot.hatchManipulator.isManipulatorRetracted();
+  protected boolean isFinished() {
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.lift.driveAllMotors(0.0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
