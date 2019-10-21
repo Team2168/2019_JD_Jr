@@ -5,45 +5,55 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.hatch_manipulator;
+package org.team2168.commands.hatchProbePistons;
+
+import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2168.Robot;
-import org.team2168.subsystem.HatchManipulator;
 
-public class Hatch_Extend extends Command {
-  public Hatch_Extend() {
+//this command grabs the hatch 
+public class WaitUntilHatch extends Command
+{
+  public WaitUntilHatch()
+  {
+    requires(Robot.hatchManipulator);
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires (Robot.hatchManipulator);
   }
 
   // Called just before this Command runs the first time
   @Override
-  protected void initialize() {
-
+  protected void initialize()
+  {
+   
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.hatchManipulator.extend();
+  protected void execute()
+  {
+    Robot.hatchManipulator.retract();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() {
-    return Robot.hatchManipulator.isManipulatorExtended();
+  protected boolean isFinished()
+  {
+    return Robot.hatchManipulator.isHatchPresent();
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end()
+  {
+    Robot.hatchManipulator.extend();
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted()
+  {
+
   }
 }

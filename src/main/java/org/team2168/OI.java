@@ -1,6 +1,11 @@
 
 package org.team2168;
 
+import org.team2168.commands.hatchManipulator.DisengageHatch;
+import org.team2168.commands.hatchManipulator.EngageHatch;
+import org.team2168.commands.hatchManipulator.IntakeHatchPanel;
+import org.team2168.commands.hatchProbePistons.WaitUntilHatch;
+import org.team2168.commands.vacuumClimber.DriveVacuumClimberPumpWithConstant;
 import org.team2168.utils.F310;
 import org.team2168.utils.LinearInterpolator;
 
@@ -54,52 +59,37 @@ public class OI
 		/*************************************************************************
 		 * Driver Joystick *
 		 *************************************************************************/
-		// driverJoystick.ButtonStart().whenPressed(new EngageStingers()); // add drivetrainshifter
-		// driverJoystick.ButtonStart().whenPressed(new DisengageDrivetrain());
-		// driverJoystick.ButtonStart().whenPressed(new DriveMonkeyBarPivotPIDPath(63));
-
-		// driverJoystick.ButtonA().whenPressed(new EngageDrivetrain());
-		// driverJoystick.ButtonA().whenPressed(new DisengageStingers());
-
-		// driverJoystick.ButtonX().whenPressed(new DriveMonkeyBarPivotPIDPathAutoClimb(63, 0, 3));
-		// driverJoystick.ButtonX().whenPressed(new DriveStingerPIDPath(0,25,3.5));
-		
-		// driverJoystick.ButtonBack().whenPressed(new DisengageDrivetrain());
-		// driverJoystick.ButtonBack().whenPressed(new DisengageStingers());
 
 		// driverJoystick.ButtonB().whenPressed(new EnableLimelight());
 		// driverJoystick.ButtonB().whenReleased(new PauseLimelight());
 		// driverJoystick.ButtonLeftStick().whenPressed(new EnableLimelight());
 		// driverJoystick.ButtonLeftStick().whenReleased(new PauseLimelight());
 
-		// gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
+		gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
 
+		/*************************************************************************
+		 * Driver Joystick *
+		 *************************************************************************/
 		
-		// operatorJoystick.ButtonDownDPad().whenPressed(new MoveLiftToLvl1Position());
-		// operatorJoystick.ButtonRightDPad().whenPressed(new MoveLiftToLvl2Position());
-		// operatorJoystick.ButtonUpDPad().whenPressed(new MoveLiftToLvl3Position());
-		// operatorJoystick.ButtonLeftDPad().whenPressed(new MoveLiftToCargoShipPosition());
+		operatorJoystick.ButtonDownDPad().whenPressed(new DriveVacuumClimberPumpWithConstant(-0.7)); //TODO totally a guess
+		operatorJoystick.ButtonDownDPad().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
+		operatorJoystick.ButtonUpDPad().whenPressed(new DriveVacuumClimberPumpWithConstant(0.7));
+		operatorJoystick.ButtonUpDPad().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
 
-		// operatorJoystick.ButtonRightBumper().whenPressed(new DriveMonkeyBarPivotWithConstant(0.7));
-		// operatorJoystick.ButtonRightBumper().whenReleased(new DriveMonkeyBarPivotWithConstant(0.0));
-		// operatorJoystick.ButtonLeftBumper().whenPressed(new DriveMonkeyBarPivotWithConstant(-0.7));
-		// operatorJoystick.ButtonLeftBumper().whenReleased(new DriveMonkeyBarPivotWithConstant(0.0));
+
 
 		//Button X
-		// operatorJoystick.ButtonX().whenPressed(new ExtendHatchPlunger());
-		// operatorJoystick.ButtonX().whileHeld(new IntakeHatchPanel());
+		operatorJoystick.ButtonX().whileHeld(new IntakeHatchPanel());
 
 		// Button A
-		// operatorJoystick.ButtonA().whenPressed(new RetractHatchPlunger());
+		operatorJoystick.ButtonA().whenPressed(new DriveVacuumClimberPumpWithConstant(1.0));
 		
 		//Button Y
-		// operatorJoystick.ButtonY().whenPressed(new EngageHatchPanel());
+		operatorJoystick.ButtonY().whenPressed(new EngageHatch());
 		
 		//Button B
-		// operatorJoystick.ButtonB().whenPressed(new DisengageHatchPanel());
+		operatorJoystick.ButtonB().whenPressed(new DisengageHatch());
 
-		// operatorJoystick.ButtonStart().whenPressed(new DriveMonkeyBarPivotPIDPath(40));
-		// operatorJoystick.ButtonBack().whenPressed(new DriveMonkeyBarPivotPIDPath(110));
 	}
 	
 

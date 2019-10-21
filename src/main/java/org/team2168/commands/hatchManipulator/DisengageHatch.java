@@ -5,14 +5,14 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.hatch_manipulator;
+package org.team2168.commands.hatchManipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.team2168.Robot;
 import org.team2168.subsystem.HatchManipulator;
 
-public class Hatch_Retract extends Command {
-  public Hatch_Retract() {
+public class DisengageHatch extends Command {
+  public DisengageHatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
   }
