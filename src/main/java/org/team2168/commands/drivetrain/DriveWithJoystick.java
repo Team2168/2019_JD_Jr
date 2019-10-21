@@ -104,7 +104,7 @@ public class DriveWithJoystick extends Command {
     protected void execute() {
 
         double headingCorrection = 0.0;
-        ctrlStyle = Robot.getControlStyleName();
+        ctrlStyle = Robot.getControlStyleInt();
 
         switch(ctrlStyle) {
         case 0:

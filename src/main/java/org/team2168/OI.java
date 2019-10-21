@@ -4,7 +4,6 @@ package org.team2168;
 import org.team2168.commands.hatchManipulator.DisengageHatch;
 import org.team2168.commands.hatchManipulator.EngageHatch;
 import org.team2168.commands.hatchManipulator.IntakeHatchPanel;
-import org.team2168.commands.hatchProbePistons.WaitUntilHatch;
 import org.team2168.commands.vacuumClimber.DriveVacuumClimberPumpWithConstant;
 import org.team2168.utils.F310;
 import org.team2168.utils.LinearInterpolator;

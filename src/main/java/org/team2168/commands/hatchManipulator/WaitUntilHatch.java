@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.hatchProbePistons;
+package org.team2168.commands.hatchManipulator;
 
 import org.team2168.Robot;
 
