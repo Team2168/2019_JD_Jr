@@ -9,7 +9,7 @@ package org.team2168.commands.hatchManipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
 import org.team2168.Robot;
-import org.team2168.subsystem.HatchManipulator;
+import org.team2168.subsystems.HatchManipulator;
 
 public class EngageHatch extends Command {
   public EngageHatch() {

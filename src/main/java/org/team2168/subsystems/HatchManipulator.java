@@ -1,4 +1,4 @@
-package org.team2168.subsystem;
+package org.team2168.subsystems;
 
 import org.team2168.RobotMap;
 import org.team2168.PID.sensors.CanDigitalInput;

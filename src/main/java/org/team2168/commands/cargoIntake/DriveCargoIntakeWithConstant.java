@@ -5,16 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.hatchManipulator;
+package org.team2168.commands.cargoIntake ;
+
+import org.team2168.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.team2168.Robot;
-import org.team2168.subsystems.HatchManipulator;
 
-public class DisengageHatch extends Command {
-  public DisengageHatch() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class DriveCargoIntakeWithConstant extends Command {
+
+  double _speed;
+
+  public DriveCargoIntakeWithConstant(double speed)
+  {
+    requires(Robot.cargoIntake);
+    this._speed = speed;
   }
 
   // Called just before this Command runs the first time
@@ -25,25 +29,29 @@ public class DisengageHatch extends Command {
 
   // Called repeatedly when this Command is scheduled to run
   @Override
-  protected void execute() {
-    Robot.hatchManipulator.retract();
+  protected void execute()
+  {
+    Robot.cargoIntake.driveCargoIntakeMotor(_speed);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() 
-  {
-   return Robot.hatchManipulator.isManipulatorRetracted();
+  protected boolean isFinished() {
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
-  protected void end() {
+  protected void end() 
+  {
+    Robot.cargoIntake.driveCargoIntakeMotor(0.0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
-  protected void interrupted() {
+  protected void interrupted() 
+  {
+    end();
   }
 }
