@@ -41,10 +41,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	// PWM (0 to 9) on RoboRio/////////////////////////////////////////////////
 	public static final int RIGHT_DRIVE_MOTOR_1 = 0; 
 	public static final int RIGHT_DRIVE_MOTOR_2 = 1; 
-	public static final int RIGHT_DRIVE_MOTOR_3 = 2; 
-	public static final int LEFT_DRIVE_MOTOR_1 = 3; 
-	public static final int LEFT_DRIVE_MOTOR_2 = 4; 
-	public static final int LEFT_DRIVE_MOTOR_3 = 5; 
+	public static final int LEFT_DRIVE_MOTOR_1 = 2; 
+	public static final int LEFT_DRIVE_MOTOR_2 = 3; 
 
 
 	// Digital IO Channels//////////////////////////////////////////////////////
@@ -154,6 +152,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int CLIMBER_LIFT_MOTOR_2_PDP = 10;
 	public static final int CLIMBER_PUMP_MOTOR_PDP = 11;
 
+
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 15;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 30; //not used in 4 motor DT
@@ -177,10 +176,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	// TODO check if the reverse values match the physical robot
 	public static final boolean DT_REVERSE_LEFT1 = false;
 	public static final boolean DT_REVERSE_LEFT2 = false;
-	public static final boolean DT_REVERSE_LEFT3 = false;
 	public static final boolean DT_REVERSE_RIGHT1 = true;
 	public static final boolean DT_REVERSE_RIGHT2 = true;
-	public static final boolean DT_REVERSE_RIGHT3 = true; 
 
 	public static final boolean DT_3_MOTORS_PER_SIDE = false;
 
@@ -190,6 +187,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	private static final double DRIVE_WHEEL_DIAMETER = 6.0;   //inches;
 	public static final int DRIVE_ENCODER_PULSE_PER_ROT = (int) (DRIVE_PULSE_PER_ROTATION * DRIVE_GEAR_RATIO); // pulse per rotation * gear																					// ratio
 	
+	//numbers need updating based on hardware for JD jr
 	public static final double DRIVE_ENCODER_DIST_PER_TICK = (Math.PI * DRIVE_WHEEL_DIAMETER / DRIVE_ENCODER_PULSE_PER_ROT);
 	public static final CounterBase.EncodingType DRIVE_ENCODING_TYPE = CounterBase.EncodingType.k4X; // count rising and falling edges on
 	public static final AverageEncoder.PositionReturnType DRIVE_POS_RETURN_TYPE = AverageEncoder.PositionReturnType.INCH;
@@ -312,6 +310,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	 *                         PID PARAMETERS                                *
 	 *************************************************************************/
 	// period to run PID loops on drive train
+	// TODO: check for updates 
 	public static final long DRIVE_TRAIN_PID_PERIOD = 20;// 70ms loop
 	public static final int DRIVE_TRAIN_PID_ARRAY_SIZE = 30;
 

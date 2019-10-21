@@ -9,7 +9,7 @@ package org.team2168;
 
 import org.team2168.commands.autos.DoNothing;
 import org.team2168.commands.pneumatics.StartCompressor;
-import org.team2168.subsystem.HatchManipulator;
+import org.team2168.subsystems.HatchManipulator;
 import org.team2168.subsystems.IntakePivot;
 import org.team2168.subsystems.Pneumatics;
 import org.team2168.subsystems.VacuumClimberLift;
@@ -18,6 +18,7 @@ import org.team2168.subsystems.IntakePivot;
 import org.team2168.subsystems.HatchManipulator;
 import org.team2168.subsystems.CargoIntake;
 import org.team2168.subsystems.Lift;
+import org.team2168.subsystems.Drivetrain;
 import org.team2168.utils.Debouncer;
 import org.team2168.utils.PowerDistribution;
 import org.team2168.utils.consoleprinter.ConsolePrinter;
@@ -36,22 +37,29 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * functions corresponding to each mode, as described in the TimedRobot
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the build.gradle file in the
- * project.
+ * project
  */
+
+// gyro calibration
 public class Robot extends TimedRobot {
   private static final String kDefaultAuto = "Default";
   private static final String kCustomAuto = "My Auto";
   private String m_autoSelected;
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+
+  // Operator Interface
+  public static OI oi;
+
+  //subsystems
+  public static Drivetrain drivetrain;
   public static HatchManipulator hatchManipulator;
   public static IntakePivot intakePivot;
   public static CargoIntake cargoIntake;
   public static Lift lift;
+  public static Pneumatics pneumatics; 
 
-  // Operator Interface
-  public static OI oi;
-  
-  //climber
+  // climber
   public static VacuumClimberLift vacuumClimberLift;
   public static VacuumClimberPump vacuumClimberPump;
 
@@ -65,9 +73,9 @@ public class Robot extends TimedRobot {
   private boolean lastGyroCalibrating = false;
   private double curAngle = 0.0;
 
- // PDP Instance
+  // PDP Instance
   public static PowerDistribution pdp;
-  public static Pneumatics pneumatics; 
+
 
   // Driverstation Instance
   public static DriverStation driverstation;
@@ -102,16 +110,18 @@ public class Robot extends TimedRobot {
       ConsolePrinter.init();
       ConsolePrinter.setRate(RobotMap.CONSOLE_PRINTER_LOG_RATE_MS);
 
-      vacuumClimberLift = VacuumClimberLift.getInstance();
-      vacuumClimberPump = VacuumClimberPump.getInstance();
+      drivetrain = Drivetrain.getInstance();
       intakePivot = IntakePivot.getInstance();
       hatchManipulator = HatchManipulator.getInstance();
       cargoIntake = CargoIntake.getInstance();
       lift = Lift.GetInstance();
+      pneumatics = Pneumatics.getInstance();
+
+      vacuumClimberLift = VacuumClimberLift.getInstance();
+      vacuumClimberPump = VacuumClimberPump.getInstance();
       
       drivetrain.calibrateGyro();
       driverstation = DriverStation.getInstance();
-      pneumatics = Pneumatics.getInstance();
 
       // Starting PDP
       pdp = PowerDistribution.getInstance();
@@ -119,7 +129,7 @@ public class Robot extends TimedRobot {
 
 
 
-          /*******************************************************
+      /*******************************************************
        *                    
        ******************************************************/
 
@@ -166,6 +176,7 @@ public class Robot extends TimedRobot {
       return;
     }
   }
+  
 
   /**
    * This function is called every robot packet, no matter the mode. Use
@@ -235,9 +246,6 @@ public class Robot extends TimedRobot {
       autonomousCommand.start();
   }
 
-  /**
-   * This function is called periodically during autonomous
-   */
   public void autonomousPeriodic()
   {
     autoMode = true;
