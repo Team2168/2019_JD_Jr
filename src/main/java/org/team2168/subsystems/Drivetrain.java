@@ -70,6 +70,11 @@ public class Drivetrain extends Subsystem {
   public volatile double rightMotor1Voltage;
   public volatile double rightMotor2Voltage;
 
+  double rightMotor1FPS;
+  double rightMotor2FPS;
+  double leftMotor1FPS;
+  double lefttMotor2FPS;
+
   double runTime = Timer.getFPGATimestamp();
 
   
@@ -80,11 +85,6 @@ public class Drivetrain extends Subsystem {
     leftMotor2 = new CANSparkMax(RobotMap.LEFT_DRIVE_MOTOR_2, MotorType.kBrushless);
     rightMotor1 = new CANSparkMax(RobotMap.RIGHT_DRIVE_MOTOR_1, MotorType.kBrushless);
     rightMotor2 = new CANSparkMax(RobotMap.RIGHT_DRIVE_MOTOR_2, MotorType.kBrushless);
-
-    double rightMotor1FPS;
-    double rightMotor2FPS;
-    double leftMotor1FPS;
-    double lefttMotor2FPS;
 
     drivetrainRightEncoder = new AverageEncoder(RobotMap.RIGHT_DRIVE_ENCODER_A, RobotMap.RIGHT_DRIVE_ENCODER_B,
         RobotMap.DRIVE_ENCODER_PULSE_PER_ROT, RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
@@ -446,10 +446,6 @@ public class Drivetrain extends Subsystem {
     return rightMotor1Voltage;
   }
 
-  public void startGyroCalibrating()
-  {
-    _gyroSPI.startCalibrating();
-  }
   
   /**
    * Returns the last commanded voltage of right Motor 2
@@ -538,6 +534,11 @@ public class Drivetrain extends Subsystem {
     return _gyroSPI.getPos();
   }
 
+  public void startGyroCalibrating()
+  {
+    _gyroSPI.startCalibrating();
+  }
+  
   /**
    * Reset robot heading to zero.
    */
