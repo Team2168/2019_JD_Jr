@@ -1,6 +1,8 @@
 
 package org.team2168;
 
+import org.team2168.commands.drivetrain.PIDCommands.EnableLimelight;
+import org.team2168.commands.drivetrain.PIDCommands.PauseLimelight;
 import org.team2168.commands.hatchManipulator.DisengageHatch;
 import org.team2168.commands.hatchManipulator.EngageHatch;
 import org.team2168.commands.hatchManipulator.IntakeHatchPanel;
@@ -59,10 +61,10 @@ public class OI
 		 * Driver Joystick *
 		 *************************************************************************/
 
-		// driverJoystick.ButtonB().whenPressed(new EnableLimelight());
-		// driverJoystick.ButtonB().whenReleased(new PauseLimelight());
-		// driverJoystick.ButtonLeftStick().whenPressed(new EnableLimelight());
-		// driverJoystick.ButtonLeftStick().whenReleased(new PauseLimelight());
+		driverJoystick.ButtonB().whenPressed(new EnableLimelight());
+		driverJoystick.ButtonB().whenReleased(new PauseLimelight());
+		driverJoystick.ButtonLeftStick().whenPressed(new EnableLimelight());
+		driverJoystick.ButtonLeftStick().whenReleased(new PauseLimelight());
 
 		gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
 
