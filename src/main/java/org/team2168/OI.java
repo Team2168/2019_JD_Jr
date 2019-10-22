@@ -116,33 +116,13 @@ public class OI
 		}
 
 	/*************************************************************************
-	 * Hatch Probe Pivot *
+	 * Cargo Intake *
 	 *************************************************************************/
-	public double getHatchProbePivotJoystickValue()
-	{
-
-		return operatorJoystick.getRightStickRaw_Y();
-	}
 
 	public double getCargoIntakeJoystickValue()
 	{
 
 		return operatorJoystick.getLeftTriggerAxisRaw() - operatorJoystick.getRightTriggerAxisRaw();
-	}
-
-	/*************************************************************************
-	 *Monkey Bar Pivot *
-	*************************************************************************/
-	public double getMonkeyBarPivotJoystickValue()
-	{
-
-			return 0;
-	}
-
-	public double getMonkeyBarIntakeJoystickValue()
-	{
-	
-		return -operatorJoystick.getLeftTriggerAxisRaw() + operatorJoystick.getRightTriggerAxisRaw();
 	}
 
 	/*************************************************************************
@@ -171,11 +151,6 @@ public class OI
 	{
 
 		return gunStyleInterpolator.interpolate(driverJoystick.getLeftStickRaw_Y());
-	}
-
-	public double getDriveWinchJoystickValue()
-	{
-		return operatorJoystick.getRightStickRaw_X();
 	}
 
 	/**

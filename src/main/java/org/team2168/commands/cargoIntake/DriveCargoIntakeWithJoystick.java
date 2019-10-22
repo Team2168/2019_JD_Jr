@@ -8,11 +8,11 @@
 package org.team2168.commands.cargoIntake;
 
 import org.team2168.Robot;
+import org.team2168.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 public class DriveCargoIntakeWithJoystick extends Command {
-  private static double maxSpitSpeed = 0.35; 
 
   public DriveCargoIntakeWithJoystick() {
     // Use requires() here to declare subsystem dependencies
@@ -28,13 +28,13 @@ public class DriveCargoIntakeWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.oi.getCargoIntakeJoystickValue()<maxSpitSpeed)
+    if(Robot.oi.getCargoIntakeJoystickValue()<RobotMap.CARGO_INTAKE_MAX_SPEED)
     {
       Robot.cargoIntake.driveCargoIntakeMotor(Robot.oi.getCargoIntakeJoystickValue());
     }
     else
     {
-      Robot.cargoIntake.driveCargoIntakeMotor(maxSpitSpeed);
+      Robot.cargoIntake.driveCargoIntakeMotor(RobotMap.CARGO_INTAKE_MAX_SPEED);
     }
   }
 

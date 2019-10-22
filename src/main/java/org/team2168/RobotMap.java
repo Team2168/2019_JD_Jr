@@ -219,14 +219,13 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	 *                         CARGO INTAKE PARAMETERS                        *
 	 *************************************************************************/
 	public static final boolean CARGO_INTAKE_MOTOR_REVERSE = false;
-	public static final double CARGO_INTAKE_MAX_SPEED = 0.55;
+	public static final double CARGO_INTAKE_MAX_SPEED = 0.35; //taken from maxSpitSpeed inside driveCargoIntakeWithJoystick
+
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MIN = 2.5; 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MAX = 3.3; 
 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MIN_PBOT = 2.5; 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MAX_PBOT = 3.3; 
-
-	public static final double CARGO_INTAKE_MIN_SPEED = 0.1; //MADE UP FOR LEDS
 
 	/*************************************************************************
 	 *                         HATCH INTAKE PARAMETERS                        *
@@ -344,7 +343,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final double ROTATE_POSITION_I = 0.001;
 	public static final double ROTATE_POSITION_D = 0.0064778888124088;
 
-	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp
+	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp //TODO HAVE TO SET FOR JD
 	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
 	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
 
