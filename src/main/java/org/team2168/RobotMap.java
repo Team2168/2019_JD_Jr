@@ -141,16 +141,16 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	/*************************************************************************
 	*                         PDP/CAN DEVICES                                 *
 	*************************************************************************/
-	public static final int LIFT_MOTOR_1_PDP = 0;
+	public static final int LIFT_MOTOR_1_PDP = 4;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 1;
 	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 2;
-	public static final int LIFT_MOTOR_2_PDP = 3;
+	public static final int LIFT_MOTOR_2_PDP = 11;
 	public static final int COMPRESSOR_PDP = 7;
 	public static final int CARGO_INTAKE_MOTOR_PDP = 8;
 
-	public static final int CLIMBER_LIFT_MOTOR_1_PDP = 9; //TODO SET
-	public static final int CLIMBER_LIFT_MOTOR_2_PDP = 10;
-	public static final int CLIMBER_PUMP_MOTOR_PDP = 11;
+	public static final int CLIMBER_LIFT_MOTOR_1_PDP = 5;
+	public static final int CLIMBER_LIFT_MOTOR_2_PDP = 11;
+	public static final int CLIMBER_PUMP_MOTOR_PDP = 9;
 
 
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
