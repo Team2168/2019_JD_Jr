@@ -41,10 +41,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	// PWM (0 to 9) on RoboRio/////////////////////////////////////////////////
 	public static final int RIGHT_DRIVE_MOTOR_1 = 0; 
 	public static final int RIGHT_DRIVE_MOTOR_2 = 1; 
-	public static final int RIGHT_DRIVE_MOTOR_3 = 2; 
-	public static final int LEFT_DRIVE_MOTOR_1 = 3; 
-	public static final int LEFT_DRIVE_MOTOR_2 = 4; 
-	public static final int LEFT_DRIVE_MOTOR_3 = 5; 
+	public static final int LEFT_DRIVE_MOTOR_1 = 2; 
+	public static final int LEFT_DRIVE_MOTOR_2 = 3; 
 
 
 	// Digital IO Channels//////////////////////////////////////////////////////
@@ -143,16 +141,17 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	/*************************************************************************
 	*                         PDP/CAN DEVICES                                 *
 	*************************************************************************/
-	public static final int LIFT_MOTOR_1_PDP = 0;
+	public static final int LIFT_MOTOR_1_PDP = 4;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 1;
 	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 2;
-	public static final int LIFT_MOTOR_2_PDP = 3;
+	public static final int LIFT_MOTOR_2_PDP = 11;
 	public static final int COMPRESSOR_PDP = 7;
 	public static final int CARGO_INTAKE_MOTOR_PDP = 8;
 
-	public static final int CLIMBER_LIFT_MOTOR_1_PDP = 9; //TODO SET
-	public static final int CLIMBER_LIFT_MOTOR_2_PDP = 10;
-	public static final int CLIMBER_PUMP_MOTOR_PDP = 11;
+	public static final int CLIMBER_LIFT_MOTOR_1_PDP = 5;
+	public static final int CLIMBER_LIFT_MOTOR_2_PDP = 11;
+	public static final int CLIMBER_PUMP_MOTOR_PDP = 9;
+
 
 	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 15;
@@ -177,10 +176,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	// TODO check if the reverse values match the physical robot
 	public static final boolean DT_REVERSE_LEFT1 = false;
 	public static final boolean DT_REVERSE_LEFT2 = false;
-	public static final boolean DT_REVERSE_LEFT3 = false;
 	public static final boolean DT_REVERSE_RIGHT1 = true;
 	public static final boolean DT_REVERSE_RIGHT2 = true;
-	public static final boolean DT_REVERSE_RIGHT3 = true; 
 
 	public static final boolean DT_3_MOTORS_PER_SIDE = false;
 
@@ -190,6 +187,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	private static final double DRIVE_WHEEL_DIAMETER = 6.0;   //inches;
 	public static final int DRIVE_ENCODER_PULSE_PER_ROT = (int) (DRIVE_PULSE_PER_ROTATION * DRIVE_GEAR_RATIO); // pulse per rotation * gear																					// ratio
 	
+	//numbers need updating based on hardware for JD jr
 	public static final double DRIVE_ENCODER_DIST_PER_TICK = (Math.PI * DRIVE_WHEEL_DIAMETER / DRIVE_ENCODER_PULSE_PER_ROT);
 	public static final CounterBase.EncodingType DRIVE_ENCODING_TYPE = CounterBase.EncodingType.k4X; // count rising and falling edges on
 	public static final AverageEncoder.PositionReturnType DRIVE_POS_RETURN_TYPE = AverageEncoder.PositionReturnType.INCH;
@@ -221,14 +219,15 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	 *                         CARGO INTAKE PARAMETERS                        *
 	 *************************************************************************/
 	public static final boolean CARGO_INTAKE_MOTOR_REVERSE = false;
-	public static final double CARGO_INTAKE_MAX_SPEED = 0.55;
+	public static final double CARGO_INTAKE_MAX_SPEED = 0.35; //taken from maxSpitSpeed inside driveCargoIntakeWithJoystick
+	public static final double CARGO_INTAKE_HOLDING_SPEED = -0.1; //taken from OperationKeepCargo---when have cargo
+	public static final double CARGO_INTAKE_MIN_SPEED = -0.075; //taken from OperationKeepCargo---all the time when waiting for cargo (I think???)
+
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MIN = 2.5; 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MAX = 3.3; 
 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MIN_PBOT = 2.5; 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MAX_PBOT = 3.3; 
-
-	public static final double CARGO_INTAKE_MIN_SPEED = 0.1; //MADE UP FOR LEDS
 
 	/*************************************************************************
 	 *                         HATCH INTAKE PARAMETERS                        *
@@ -312,6 +311,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	 *                         PID PARAMETERS                                *
 	 *************************************************************************/
 	// period to run PID loops on drive train
+	// TODO: check for updates 
 	public static final long DRIVE_TRAIN_PID_PERIOD = 20;// 70ms loop
 	public static final int DRIVE_TRAIN_PID_ARRAY_SIZE = 30;
 
@@ -345,7 +345,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final double ROTATE_POSITION_I = 0.001;
 	public static final double ROTATE_POSITION_D = 0.0064778888124088;
 
-	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp
+	public static final double ROTATE_POSITION_P_Drive_Straight = 0.055; //0.055 comp //TODO HAVE TO SET FOR JD
 	public static final double ROTATE_POSITION_I_Drive_Straight = 0.001; //0.001
 	public static final double ROTATE_POSITION_D_Drive_Straight = 0.0064778888124088;
 

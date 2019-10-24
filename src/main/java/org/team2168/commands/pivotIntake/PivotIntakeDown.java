@@ -5,35 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.hatch_manipulator;
+package org.team2168.commands.pivotIntake;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.team2168.Robot;
-import org.team2168.subsystems.HatchManipulator;
+import edu.wpi.first.wpilibj.command.Command;
 
-public class Hatch_Retract extends Command {
-  public Hatch_Retract() {
-    // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
+public class PivotIntakeDown extends Command {
+  public PivotIntakeDown() {
+    requires(Robot.intakePivot);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.hatchManipulator.retract();
+    Robot.intakePivot.pivotIntakeDown();
   }
-
+  
   // Make this return true when this Command no longer needs to run execute()
   @Override
-  protected boolean isFinished() 
-  {
-   return Robot.hatchManipulator.isManipulatorRetracted();
+  protected boolean isFinished() {
+    return Robot.intakePivot.isPivotIntakeDown();
   }
 
   // Called once after isFinished returns true

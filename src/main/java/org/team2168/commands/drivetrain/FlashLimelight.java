@@ -5,42 +5,46 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands;
+package org.team2168.commands.drivetrain;
 
 import org.team2168.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class PivotIntakeUp extends Command {
-  public PivotIntakeUp() {
-    requires(Robot.intakePivot);
+public class FlashLimelight extends Command {
+  public FlashLimelight() {
+    // Use requires() here to declare subsystem dependencies
+    // eg. requires(chassis);
+    setTimeout(1.0);
+
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
+    Robot.drivetrain.limelight.setLedMode(2);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.intakePivot.pivotIntakeUp();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return Robot.intakePivot.isPivotIntakeUp();
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.drivetrain.limelight.setLedMode(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

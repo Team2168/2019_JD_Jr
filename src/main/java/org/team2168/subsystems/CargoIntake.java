@@ -22,7 +22,7 @@ public class CargoIntake extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
   private CanAnalogInput _sharpIRSensor;
-  private TalonSRX intakeMotor;
+  public TalonSRX intakeMotor; //public so we can link the hatch intake limit switch to it
   public static CargoIntake instance;
 
 

@@ -5,43 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.cargoIntake;
-
-import org.team2168.Robot;
-import org.team2168.RobotMap;
+package org.team2168.commands.hatchManipulator;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.team2168.Robot;
+import org.team2168.subsystems.HatchManipulator;
 
-public class DriveCargoIntakeWithJoystick extends Command {
-
-  public DriveCargoIntakeWithJoystick() {
+public class EngageHatch extends Command {
+  public EngageHatch() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.cargoIntake);
+    requires (Robot.hatchManipulator);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.cargoIntake.driveCargoIntakeMotor(Math.min(Robot.oi.getCargoIntakeJoystickValue(), RobotMap.CARGO_INTAKE_MAX_SPEED));
-
+    Robot.hatchManipulator.extend();
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return Robot.hatchManipulator.isManipulatorExtended();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.cargoIntake.driveCargoIntakeMotor(0.0);
   }
 
   // Called when another command which requires one or more of the same

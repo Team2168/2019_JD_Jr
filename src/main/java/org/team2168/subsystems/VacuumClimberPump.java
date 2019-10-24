@@ -40,6 +40,9 @@ public class VacuumClimberPump extends Subsystem {
     return _instance;
   }
 
+  /**
+   * IS positive suck???? TODO
+   */
   public void driveClimberPumpMotor(double speed)
   {
     if(RobotMap.CLIMBER_PUMP_MOTOR_REVERSE)
