@@ -220,6 +220,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	 *************************************************************************/
 	public static final boolean CARGO_INTAKE_MOTOR_REVERSE = false;
 	public static final double CARGO_INTAKE_MAX_SPEED = 0.35; //taken from maxSpitSpeed inside driveCargoIntakeWithJoystick
+	public static final double CARGO_INTAKE_HOLDING_SPEED = -0.1; //taken from OperationKeepCargo---when have cargo
+	public static final double CARGO_INTAKE_MIN_SPEED = -0.075; //taken from OperationKeepCargo---all the time when waiting for cargo (I think???)
 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MIN = 2.5; 
 	public static final double CARGO_INTAKE_IR_THRESHOLD_MAX = 3.3; 

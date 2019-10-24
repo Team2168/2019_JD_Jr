@@ -28,14 +28,8 @@ public class DriveCargoIntakeWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    if(Robot.oi.getCargoIntakeJoystickValue()<RobotMap.CARGO_INTAKE_MAX_SPEED)
-    {
-      Robot.cargoIntake.driveCargoIntakeMotor(Robot.oi.getCargoIntakeJoystickValue());
-    }
-    else
-    {
-      Robot.cargoIntake.driveCargoIntakeMotor(RobotMap.CARGO_INTAKE_MAX_SPEED);
-    }
+    Robot.cargoIntake.driveCargoIntakeMotor(Math.min(Robot.oi.getCargoIntakeJoystickValue(), RobotMap.CARGO_INTAKE_MAX_SPEED));
+
   }
 
   // Make this return true when this Command no longer needs to run execute()

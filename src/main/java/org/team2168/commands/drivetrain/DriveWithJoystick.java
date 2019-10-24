@@ -67,9 +67,7 @@ public class DriveWithJoystick extends Command {
          * Initialize driveStraightController for Gun style
          */
         case 1:
-            finished = false;
-            Robot.drivetrain.getInstance();
-        
+            finished = false;        
             // reset controller
                 Robot.drivetrain.resetPosition();	
                 Robot.drivetrain.imu.reset();
@@ -104,7 +102,6 @@ public class DriveWithJoystick extends Command {
     protected void execute() {
 
         double headingCorrection = 0.0;
-        ctrlStyle = Robot.getControlStyleInt();
 
         switch(ctrlStyle) {
         case 0:

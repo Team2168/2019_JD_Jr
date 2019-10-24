@@ -1,6 +1,7 @@
 
 package org.team2168;
 
+import org.team2168.commands.cargoIntake.OperationKeepCargo;
 import org.team2168.commands.drivetrain.PIDCommands.EnableLimelight;
 import org.team2168.commands.drivetrain.PIDCommands.PauseLimelight;
 import org.team2168.commands.hatchManipulator.DisengageHatch;
@@ -78,6 +79,7 @@ public class OI
 		operatorJoystick.ButtonUpDPad().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
 
 
+		operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCargo());
 
 		//Button X
 		operatorJoystick.ButtonX().whileHeld(new IntakeHatchPanel());

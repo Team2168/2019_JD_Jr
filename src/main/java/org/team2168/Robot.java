@@ -127,12 +127,6 @@ public class Robot extends TimedRobot {
       pdp = PowerDistribution.getInstance();
       pdp.startThread();
 
-
-
-      /*******************************************************
-       *                    
-       ******************************************************/
-
       // Start Operator Interface
       oi = OI.getInstance();
 
