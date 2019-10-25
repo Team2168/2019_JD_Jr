@@ -7,10 +7,12 @@
 
 package org.team2168.subsystems;
 
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import org.team2168.RobotMap;
-import org.team2168.commands.vacuumClimber.DriveVacuumClimberLiftWIthJoysticks;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
@@ -19,15 +21,15 @@ public class VacuumClimberLift extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private Victor climberLiftMotor1;
-  private Victor climberLiftMotor2;
+  private VictorSPX climberLiftMotor1;
+  private VictorSPX climberLiftMotor2;
 
   private static VacuumClimberLift _instance;
 
   private VacuumClimberLift()
   {
-    climberLiftMotor1 = new Victor(RobotMap.CLIMBER_LIFT_MOTOR_1_PDP);
-    climberLiftMotor2 = new Victor(RobotMap.CLIMBER_LIFT_MOTOR_2_PDP);
+    climberLiftMotor1 = new VictorSPX(RobotMap.CLIMBER_LIFT_MOTOR_1_PDP);
+    climberLiftMotor2 = new VictorSPX(RobotMap.CLIMBER_LIFT_MOTOR_2_PDP);
 
   }
 
@@ -49,7 +51,7 @@ public class VacuumClimberLift extends Subsystem {
     {
       speed = -speed;
     }
-    climberLiftMotor1.set(speed);
+    climberLiftMotor1.set(ControlMode.PercentOutput, speed);
 
   }
 
@@ -59,7 +61,7 @@ public class VacuumClimberLift extends Subsystem {
     {
       speed = -speed;
     }
-    climberLiftMotor2.set(speed);
+    climberLiftMotor2.set(ControlMode.PercentOutput, speed);
 
   }
 
@@ -73,6 +75,6 @@ public class VacuumClimberLift extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new DriveVacuumClimberLiftWIthJoysticks());
+    //setDefaultCommand(new DriveVacuumClimberLiftWIthJoysticks());
   }
 }

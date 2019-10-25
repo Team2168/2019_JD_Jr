@@ -1,12 +1,11 @@
 
 package org.team2168;
 
-import org.team2168.commands.cargoIntake.OperationKeepCargo;
 import org.team2168.commands.drivetrain.PIDCommands.EnableLimelight;
 import org.team2168.commands.drivetrain.PIDCommands.PauseLimelight;
 import org.team2168.commands.hatchManipulator.DisengageHatch;
 import org.team2168.commands.hatchManipulator.EngageHatch;
-import org.team2168.commands.hatchManipulator.IntakeHatchPanel;
+import org.team2168.commands.vacuumClimber.DriveVacuumClimberLiftWithConstant;
 import org.team2168.commands.vacuumClimber.DriveVacuumClimberPumpWithConstant;
 import org.team2168.utils.F310;
 import org.team2168.utils.LinearInterpolator;
@@ -73,24 +72,25 @@ public class OI
 		 * Driver Joystick *
 		 *************************************************************************/
 		
-		operatorJoystick.ButtonDownDPad().whenPressed(new DriveVacuumClimberPumpWithConstant(-0.7)); //TODO totally a guess
-		operatorJoystick.ButtonDownDPad().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
-		operatorJoystick.ButtonUpDPad().whenPressed(new DriveVacuumClimberPumpWithConstant(0.7));
-		operatorJoystick.ButtonUpDPad().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
+		operatorJoystick.ButtonDownDPad().whenPressed(new DriveVacuumClimberLiftWithConstant(-0.7)); //TODO totally a guess
+		operatorJoystick.ButtonDownDPad().whenReleased(new DriveVacuumClimberLiftWithConstant(0.0));
+		operatorJoystick.ButtonUpDPad().whenPressed(new DriveVacuumClimberLiftWithConstant(0.7));
+		operatorJoystick.ButtonUpDPad().whenReleased(new DriveVacuumClimberLiftWithConstant(0.0));
 
+		// operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCargo());
 
-		operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCargo());
+		// //Button X
+		// operatorJoystick.ButtonX().whileHeld(new IntakeHatchPanel());
 
-		//Button X
-		operatorJoystick.ButtonX().whileHeld(new IntakeHatchPanel());
-
-		// Button A
+		// // Button A
 		operatorJoystick.ButtonA().whenPressed(new DriveVacuumClimberPumpWithConstant(1.0));
+		operatorJoystick.ButtonA().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
+
 		
-		//Button Y
+		// //Button Y
 		operatorJoystick.ButtonY().whenPressed(new EngageHatch());
 		
-		//Button B
+		// //Button B
 		operatorJoystick.ButtonB().whenPressed(new DisengageHatch());
 
 	}
@@ -122,6 +122,10 @@ public class OI
 	/*************************************************************************
 	 * Cargo Intake *
 	 *************************************************************************/
+	public double getVacuumClimberLiftJoystickValue()
+	{
+		return -operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
+	}
 
 	public double getCargoIntakeJoystickValue()
 	{
@@ -130,12 +134,16 @@ public class OI
 	}
 
 	/*************************************************************************
+	 * Pivot Intake *
+	 *************************************************************************/
+	public double getPivotIntakeJoystickValue()
+	{
+		return operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
+	}
+
+	/*************************************************************************
 	 *Vacuum Climber Lift & Pump*
 	*************************************************************************/
-	public double getVacuumClimberLiftJoystickValue()
-	{
-		return -operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
-	}
 
 	public double getVacuumClimberPumpJoystickValue()
 	{

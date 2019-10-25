@@ -291,7 +291,7 @@ public class Lift extends Subsystem {
 
       isLiftMotor1BreakerTrip();
       isLiftMotor2BreakerTrip();
-      System.out.println("is this working?");
+      // System.out.println("is this working?");
     }
 
 

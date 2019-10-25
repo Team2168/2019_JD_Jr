@@ -20,9 +20,9 @@ public class HatchManipulator extends Subsystem {
     private HatchManipulator()
     {
         _hatchPiston = new DoubleSolenoid(RobotMap.HATCH_EXTENSION_PCM, RobotMap.HATCH_RETRACTION_PCM);
-        _limitSwitch = new CanDigitalInput(Robot.cargoIntake.intakeMotor); //TO DO
+        // _limitSwitch = new CanDigitalInput(Robot.cargoIntake.intakeMotor); //TO DO
         ConsolePrinter.putBoolean("Manipulator is Extended", () -> {return isManipulatorExtended();}, true, false);
-        ConsolePrinter.putBoolean("Is Hatch Present", () -> {return isHatchPresent();}, true, false);
+       // ConsolePrinter.putBoolean("Is Hatch Present", () -> {return isHatchPresent();}, true, false);
     }
     public void extend()
     {

@@ -8,7 +8,9 @@
 package org.team2168.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.*;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
+
 import org.team2168.Robot;
 import org.team2168.RobotMap;
 import org.team2168.PID.controllers.PIDPosition;
@@ -16,13 +18,13 @@ import org.team2168.PID.controllers.PIDSpeed;
 import org.team2168.PID.sensors.ADXRS453Gyro;
 import org.team2168.PID.sensors.AverageEncoder;
 import org.team2168.PID.sensors.IMU;
-import org.team2168.utils.consoleprinter.ConsolePrinter;
 import org.team2168.PID.sensors.Limelight;
+import org.team2168.commands.drivetrain.DriveWithJoystick;
 import org.team2168.utils.TCPSocketSender;
+import org.team2168.utils.consoleprinter.ConsolePrinter;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -81,10 +83,10 @@ public class Drivetrain extends Subsystem {
   private static Drivetrain instance = null;
 
   private Drivetrain() {
-    leftMotor1 = new CANSparkMax(RobotMap.LEFT_DRIVE_MOTOR_1, MotorType.kBrushless);
-    leftMotor2 = new CANSparkMax(RobotMap.LEFT_DRIVE_MOTOR_2, MotorType.kBrushless);
-    rightMotor1 = new CANSparkMax(RobotMap.RIGHT_DRIVE_MOTOR_1, MotorType.kBrushless);
-    rightMotor2 = new CANSparkMax(RobotMap.RIGHT_DRIVE_MOTOR_2, MotorType.kBrushless);
+    leftMotor1 = new CANSparkMax(RobotMap.DRIVETRAIN_LEFT_MOTOR_1_PDP, MotorType.kBrushless);
+    leftMotor2 = new CANSparkMax(RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP, MotorType.kBrushless);
+    rightMotor1 = new CANSparkMax(RobotMap.DRIVETRAIN_RIGHT_MOTOR_1_PDP, MotorType.kBrushless);
+    rightMotor2 = new CANSparkMax(RobotMap.DRIVETRAIN_RIGHT_MOTOR_2_PDP, MotorType.kBrushless);
 
     drivetrainRightEncoder = new AverageEncoder(RobotMap.RIGHT_DRIVE_ENCODER_A, RobotMap.RIGHT_DRIVE_ENCODER_B,
         RobotMap.DRIVE_ENCODER_PULSE_PER_ROT, RobotMap.DRIVE_ENCODER_DIST_PER_TICK,
@@ -101,11 +103,11 @@ public class Drivetrain extends Subsystem {
     rightMotor1.setSmartCurrentLimit(60);
     rightMotor2.setSmartCurrentLimit(60);
 
-    //control frame every 20ms
-    leftMotor1.setControlFramePeriodMs(20);
-    leftMotor2.setControlFramePeriodMs(20);
-    rightMotor1.setControlFramePeriodMs(20);
-    rightMotor2.setControlFramePeriodMs(20);
+    // //control frame every 20ms
+    // leftMotor1.setControlFramePeriodMs(20);
+    // leftMotor2.setControlFramePeriodMs(20);
+    // rightMotor1.setControlFramePeriodMs(20);
+    // rightMotor2.setControlFramePeriodMs(20);
 
      //status frame every 500ms
     leftMotor1.setPeriodicFramePeriod(PeriodicFrame.kStatus0,500);
@@ -585,6 +587,6 @@ public class Drivetrain extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-  //  setDefaultCommand(new DriveWithJoystick(0));
+   setDefaultCommand(new DriveWithJoystick(0));
   }
 }

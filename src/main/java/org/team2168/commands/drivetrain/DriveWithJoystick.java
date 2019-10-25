@@ -167,7 +167,15 @@ public class DriveWithJoystick extends Command {
         case 4:
             lastRotateOutput = Robot.drivetrain.rotateDriveStraightController.getControlOutput();
             headingCorrection = (Robot.drivetrain.rotateDriveStraightController.getControlOutput());
-
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
+            System.out.println("\n");
             if (Math.abs(Robot.oi.driverJoystick.getX(Hand.kLeft)) < 0.1) 
             {
                     //Drive straight
@@ -180,6 +188,8 @@ public class DriveWithJoystick extends Command {
                     else {
                         Robot.drivetrain.tankDrive(-Robot.oi.driverJoystick.getY(Hand.kLeft),
                             -Robot.oi.driverJoystick.getY(Hand.kLeft));
+
+
                     }	
             } 
             else {

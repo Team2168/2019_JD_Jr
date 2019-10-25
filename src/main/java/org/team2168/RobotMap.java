@@ -47,23 +47,13 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 
 	// Digital IO Channels//////////////////////////////////////////////////////
 	// Channels 0-9 on RoboRio
-	public static final int RIGHT_DRIVE_ENCODER_A = 0;
-	public static final int RIGHT_DRIVE_ENCODER_B = 1;
+	public static final int RIGHT_DRIVE_ENCODER_A =4;
+	public static final int RIGHT_DRIVE_ENCODER_B = 5;
 	public static final int LEFT_DRIVE_ENCODER_B = 2;
 	public static final int LEFT_DRIVE_ENCODER_A = 3;
 
-
-
-
-
-
-	public static final int RIGHT_STINGER_ENCODER_A = 4;//change something
-	public static final int RIGHT_STINGER_ENCODER_B = 5;//change
-	public static final int LEFT_STINGER_ENCODER_B = 8;//change
-	public static final int LEFT_STINGER_ENCODER_A = 9;//change
-
-	public static final int LIFT_FULLY_UP_LIMIT = 18;
-	public static final int LIFT_FULLY_DOWN_LIMIT = 19;
+	public static final int LIFT_FULLY_UP_LIMIT = 0;
+	public static final int LIFT_FULLY_DOWN_LIMIT = 1;
 
 
 
@@ -110,40 +100,19 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	*************************************************************************/
 
 	//Double Soldenoids PCM ID = 0
-	public final static int DRIVETRAIN_ENGAGED_PCM = 0;
-	public static final int DRIVETRAIN_DISENGAGED_PCM = 1; 
-	public static final int HATCH_PANEL_VELCRO_PUSHER_PCM = 4; //old floor pickup
-	public static final int HATCH_INTAKE_LOWER_PCM = 6;
-	public static final int HATCH_INTAKE_RAISE_PCM = 7;
-	public static final int STINGER_RACHET_ENGAGE_PCM = 4;
-	public static final int STINGER_RACHET_DISENGAGE_PCM = 5;
-	public static final int STINGER_ENGAGE_PCM = 3;
-	public static final int STINGER_DISENGAGE_PCM = 2;
 
-	public static final int HATCH_EXTENSION_PCM = 1;
-	public static final int HATCH_RETRACTION_PCM = 2;
+	public static final int HATCH_EXTENSION_PCM = 4;
+	public static final int HATCH_RETRACTION_PCM = 5;
 	
-	//Double Soldenoids PCM ID = 1
-	public static final int PROBE_ROTATE_BRAKE_EXTENDED_PCM = 0;
-	public static final int PROBE_ROTATE_BRAKE_RETRACTED_PCM = 5;
-	public static final int CARGO_PUNCH_EXTEND_PCM = 2;
-	public static final int CARGO_PUNCH_RETRACT_PCM = 7;
-
-	public static final int PROBE_EXTEND_PCM = 6;
-	public static final int PROBE_RETRACT_PCM = 1;
-
-	public static final int PROBE_ENGAGE_PCM = 3;
-	public static final int PROBE_DISENGAGE_PCM = 4;
-
-	public static final int PIVOT_EXTENDS_PCM = 1;
-	public static final int PIVOT_RETRACTS_PCM = 2;
+	public static final int PIVOT_EXTENDS_PCM = 6; //???? TODO
+	public static final int PIVOT_RETRACTS_PCM = 7;
 
 	/*************************************************************************
 	*                         PDP/CAN DEVICES                                 *
 	*************************************************************************/
 	public static final int LIFT_MOTOR_1_PDP = 4;
-	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 1;
-	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 2;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_1_PDP = 12;
+	public static final int DRIVETRAIN_LEFT_MOTOR_1_PDP = 3;
 	public static final int LIFT_MOTOR_2_PDP = 11;
 	public static final int COMPRESSOR_PDP = 7;
 	public static final int CARGO_INTAKE_MOTOR_PDP = 8;
@@ -153,8 +122,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	public static final int CLIMBER_PUMP_MOTOR_PDP = 9;
 
 
-	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 14;
-	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 15;
+	public static final int DRIVETRAIN_LEFT_MOTOR_2_PDP = 2;
+	public static final int DRIVETRAIN_RIGHT_MOTOR_2_PDP = 13;
 	public static final int DRIVETRAIN_RIGHT_MOTOR_3_PDP = 30; //not used in 4 motor DT
 	public static final int DRIVETRAIN_LEFT_MOTOR_3_PDP = 31; //not used in 4 motor DT
 
@@ -218,7 +187,7 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	/*************************************************************************
 	 *                         CARGO INTAKE PARAMETERS                        *
 	 *************************************************************************/
-	public static final boolean CARGO_INTAKE_MOTOR_REVERSE = false;
+	public static final boolean CARGO_INTAKE_MOTOR_REVERSE = true;
 	public static final double CARGO_INTAKE_MAX_SPEED = 0.35; //taken from maxSpitSpeed inside driveCargoIntakeWithJoystick
 	public static final double CARGO_INTAKE_HOLDING_SPEED = -0.1; //taken from OperationKeepCargo---when have cargo
 	public static final double CARGO_INTAKE_MIN_SPEED = -0.075; //taken from OperationKeepCargo---all the time when waiting for cargo (I think???)
@@ -243,8 +212,8 @@ public static final double MAIN_PERIOD_S = 1.0/50.0; // Main loop 200Hz
 	 *                         LIFT PARAMETERS                               *
 	 *************************************************************************/
 	public static final boolean LIFT_MOTOR1_REVERSE = true;
-	public static final boolean LIFT_MOTOR2_REVERSE = true;
-	public static final boolean LIFT_ENABLE_HEIGHT_HOLD = true;
+	public static final boolean LIFT_MOTOR2_REVERSE = false;
+	public static final boolean LIFT_ENABLE_HEIGHT_HOLD = false;
 	public static final boolean LIFT_ENABLE_INTERLOCKS = false;
 
 	public static final double LIFT_POT_CROSS_BAR_HEIGHT = 40.0; //inches on lift p2ot

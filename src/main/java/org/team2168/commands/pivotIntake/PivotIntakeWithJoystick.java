@@ -5,30 +5,31 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package org.team2168.commands.vacuumClimber;
+package org.team2168.commands.pivotIntake;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.team2168.Robot;
 
-public class DriveVacuumClimberLiftWithConstant extends Command {
-  double _speed;
-  public DriveVacuumClimberLiftWithConstant(double inputSpeed) {
+import edu.wpi.first.wpilibj.command.Command;
+
+public class PivotIntakeWithJoystick extends Command {
+  public PivotIntakeWithJoystick() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.vacuumClimberLift);
-    _speed = inputSpeed;
+    requires(Robot.intakePivot);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.vacuumClimberLift.driveClimberLiftMotors(_speed);
+    if(Robot.oi.getPivotIntakeJoystickValue() > 0.9)
+      Robot.intakePivot.pivotIntakeUp();
+    else if(Robot.oi.getPivotIntakeJoystickValue() < -0.9)
+      Robot.intakePivot.pivotIntakeDown();
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,15 +41,11 @@ public class DriveVacuumClimberLiftWithConstant extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.vacuumClimberLift.driveClimberLiftMotors(0.0);
-
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-
-    end();
   }
 }
