@@ -162,4 +162,78 @@ public class PowerDistribution {
 	public double totalPower() {
 		return totalPower;
 	}
+
+	public boolean isRightMotorTwoTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean isRightMotorOneTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_RIGHT_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+
+	
+	public boolean isLeftMotorOneTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+
+	public boolean isLeftMotorTwoTrip() {
+		if (channelError[RobotMap.DRIVETRAIN_LEFT_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+
+	
+	public boolean isLiftMotorOneTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_1_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean isLiftMotorTwoTrip() {
+		if (channelError[RobotMap.LIFT_MOTOR_2_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+	
+
+	public boolean isIntakeMotorTrip() {
+		if (channelError[RobotMap.CARGO_INTAKE_MOTOR_PDP] == 2)
+			return true;
+		else
+			return false;
+	}
+
+
+	public boolean isClimberLiftMotorOneTrip(){
+		if (channelError[RobotMap.CLIMBER_LIFT_MOTOR_1_PDP] ==2)
+			return true;
+		else 
+			return false;
+	}
+
+	public boolean isClimberLiftMotorTwoTrip(){
+		if (channelError[RobotMap.CLIMBER_LIFT_MOTOR_2_PDP] ==2)
+			return true;
+		else 
+			return false;
+	}
+
+	public boolean isClimberPumpMotorTrip(){
+		if (channelError[RobotMap.CLIMBER_PUMP_MOTOR_PDP] ==2)
+			return true;
+		else 
+			return false;
+	}
 }

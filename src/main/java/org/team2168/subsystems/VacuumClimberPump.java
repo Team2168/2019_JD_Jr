@@ -7,10 +7,13 @@
 
 package org.team2168.subsystems;
 
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import org.team2168.RobotMap;
 import org.team2168.commands.vacuumClimber.DriveVacuumClimberPumpWithJoystick;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Add your docs here.
@@ -19,13 +22,13 @@ public class VacuumClimberPump extends Subsystem {
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
-  private Victor climberPumpMotor;
+  private VictorSPX climberPumpMotor;
 
   private static VacuumClimberPump _instance;
 
   private VacuumClimberPump()
   {
-    climberPumpMotor = new Victor(RobotMap.CLIMBER_PUMP_MOTOR_PDP);
+    climberPumpMotor = new VictorSPX(RobotMap.CLIMBER_PUMP_MOTOR_PDP);
   }
 
   /**
@@ -40,13 +43,16 @@ public class VacuumClimberPump extends Subsystem {
     return _instance;
   }
 
+  /**
+   * IS positive suck???? TODO
+   */
   public void driveClimberPumpMotor(double speed)
   {
     if(RobotMap.CLIMBER_PUMP_MOTOR_REVERSE)
     {
       speed = -speed;
     }
-    climberPumpMotor.set(speed);
+    climberPumpMotor.set(ControlMode.PercentOutput, speed);
   }
 
   @Override

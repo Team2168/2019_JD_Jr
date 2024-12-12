@@ -1,6 +1,12 @@
 
 package org.team2168;
 
+import org.team2168.commands.drivetrain.PIDCommands.EnableLimelight;
+import org.team2168.commands.drivetrain.PIDCommands.PauseLimelight;
+import org.team2168.commands.hatchManipulator.DisengageHatch;
+import org.team2168.commands.hatchManipulator.EngageHatch;
+import org.team2168.commands.vacuumClimber.DriveVacuumClimberLiftWithConstant;
+import org.team2168.commands.vacuumClimber.DriveVacuumClimberPumpWithConstant;
 import org.team2168.utils.F310;
 import org.team2168.utils.LinearInterpolator;
 
@@ -54,52 +60,39 @@ public class OI
 		/*************************************************************************
 		 * Driver Joystick *
 		 *************************************************************************/
-		// driverJoystick.ButtonStart().whenPressed(new EngageStingers()); // add drivetrainshifter
-		// driverJoystick.ButtonStart().whenPressed(new DisengageDrivetrain());
-		// driverJoystick.ButtonStart().whenPressed(new DriveMonkeyBarPivotPIDPath(63));
 
-		// driverJoystick.ButtonA().whenPressed(new EngageDrivetrain());
-		// driverJoystick.ButtonA().whenPressed(new DisengageStingers());
+		driverJoystick.ButtonB().whenPressed(new EnableLimelight());
+		driverJoystick.ButtonB().whenReleased(new PauseLimelight());
+		driverJoystick.ButtonLeftStick().whenPressed(new EnableLimelight());
+		driverJoystick.ButtonLeftStick().whenReleased(new PauseLimelight());
 
-		// driverJoystick.ButtonX().whenPressed(new DriveMonkeyBarPivotPIDPathAutoClimb(63, 0, 3));
-		// driverJoystick.ButtonX().whenPressed(new DriveStingerPIDPath(0,25,3.5));
+		gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
+
+		/*************************************************************************
+		 * Driver Joystick *
+		 *************************************************************************/
 		
-		// driverJoystick.ButtonBack().whenPressed(new DisengageDrivetrain());
-		// driverJoystick.ButtonBack().whenPressed(new DisengageStingers());
+		operatorJoystick.ButtonDownDPad().whenPressed(new DriveVacuumClimberLiftWithConstant(-0.7)); //TODO totally a guess
+		operatorJoystick.ButtonDownDPad().whenReleased(new DriveVacuumClimberLiftWithConstant(0.0));
+		operatorJoystick.ButtonUpDPad().whenPressed(new DriveVacuumClimberLiftWithConstant(0.7));
+		operatorJoystick.ButtonUpDPad().whenReleased(new DriveVacuumClimberLiftWithConstant(0.0));
 
-		// driverJoystick.ButtonB().whenPressed(new EnableLimelight());
-		// driverJoystick.ButtonB().whenReleased(new PauseLimelight());
-		// driverJoystick.ButtonLeftStick().whenPressed(new EnableLimelight());
-		// driverJoystick.ButtonLeftStick().whenReleased(new PauseLimelight());
+		// operatorJoystick.ButtonRightTrigger().whenReleased(new OperationKeepCargo());
 
-		// gunStyleInterpolator = new LinearInterpolator(gunStyleArray);
-
-		
-		// operatorJoystick.ButtonDownDPad().whenPressed(new MoveLiftToLvl1Position());
-		// operatorJoystick.ButtonRightDPad().whenPressed(new MoveLiftToLvl2Position());
-		// operatorJoystick.ButtonUpDPad().whenPressed(new MoveLiftToLvl3Position());
-		// operatorJoystick.ButtonLeftDPad().whenPressed(new MoveLiftToCargoShipPosition());
-
-		// operatorJoystick.ButtonRightBumper().whenPressed(new DriveMonkeyBarPivotWithConstant(0.7));
-		// operatorJoystick.ButtonRightBumper().whenReleased(new DriveMonkeyBarPivotWithConstant(0.0));
-		// operatorJoystick.ButtonLeftBumper().whenPressed(new DriveMonkeyBarPivotWithConstant(-0.7));
-		// operatorJoystick.ButtonLeftBumper().whenReleased(new DriveMonkeyBarPivotWithConstant(0.0));
-
-		//Button X
-		// operatorJoystick.ButtonX().whenPressed(new ExtendHatchPlunger());
+		// //Button X
 		// operatorJoystick.ButtonX().whileHeld(new IntakeHatchPanel());
 
-		// Button A
-		// operatorJoystick.ButtonA().whenPressed(new RetractHatchPlunger());
-		
-		//Button Y
-		// operatorJoystick.ButtonY().whenPressed(new EngageHatchPanel());
-		
-		//Button B
-		// operatorJoystick.ButtonB().whenPressed(new DisengageHatchPanel());
+		// // Button A
+		operatorJoystick.ButtonA().whenPressed(new DriveVacuumClimberPumpWithConstant(1.0));
+		operatorJoystick.ButtonA().whenReleased(new DriveVacuumClimberPumpWithConstant(0.0));
 
-		// operatorJoystick.ButtonStart().whenPressed(new DriveMonkeyBarPivotPIDPath(40));
-		// operatorJoystick.ButtonBack().whenPressed(new DriveMonkeyBarPivotPIDPath(110));
+		
+		// //Button Y
+		operatorJoystick.ButtonY().whenPressed(new EngageHatch());
+		
+		// //Button B
+		operatorJoystick.ButtonB().whenPressed(new DisengageHatch());
+
 	}
 	
 
@@ -127,12 +120,11 @@ public class OI
 		}
 
 	/*************************************************************************
-	 * Hatch Probe Pivot *
+	 * Cargo Intake *
 	 *************************************************************************/
-	public double getHatchProbePivotJoystickValue()
+	public double getVacuumClimberLiftJoystickValue()
 	{
-
-		return operatorJoystick.getRightStickRaw_Y();
+		return -operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
 	}
 
 	public double getCargoIntakeJoystickValue()
@@ -142,27 +134,16 @@ public class OI
 	}
 
 	/*************************************************************************
-	 *Monkey Bar Pivot *
-	*************************************************************************/
-	public double getMonkeyBarPivotJoystickValue()
+	 * Pivot Intake *
+	 *************************************************************************/
+	public double getPivotIntakeJoystickValue()
 	{
-
-			return 0;
-	}
-
-	public double getMonkeyBarIntakeJoystickValue()
-	{
-	
-		return -operatorJoystick.getLeftTriggerAxisRaw() + operatorJoystick.getRightTriggerAxisRaw();
+		return operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
 	}
 
 	/*************************************************************************
 	 *Vacuum Climber Lift & Pump*
 	*************************************************************************/
-	public double getVacuumClimberLiftJoystickValue()
-	{
-		return -operatorJoystick.getRightStickRaw_Y(); //invert so pushing up goes up
-	}
 
 	public double getVacuumClimberPumpJoystickValue()
 	{
@@ -182,11 +163,6 @@ public class OI
 	{
 
 		return gunStyleInterpolator.interpolate(driverJoystick.getLeftStickRaw_Y());
-	}
-
-	public double getDriveWinchJoystickValue()
-	{
-		return operatorJoystick.getRightStickRaw_X();
 	}
 
 	/**
